@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples</title>
+  <script>
+    function askQuestion() {
+      const question = "What is Superman's real name?"
+      const answer = prompt(question);
+      alert(`You answered ${answer}`);
+    }
+
+    const quiz = [
+      ["What is Superman's real name?", "Clark Kent"],
+      ["What is Wonder Woman's real name?", "Diana Prince"],
+      ["What is Batman's real name?", "Bruce Wayne"]
+    ];
+
+    function basicQuiz(quiz) {
+
+
+      let score = 0
+
+      for (const [question, answer] of quiz) {
+        const response = prompt(question);
+        if (response === answer) {
+          alert('Correct!');
+          score++;
+        } else {
+          alert(`Wrong! The correct answer was ${answer}`);
+        }
+      }
+
+      alert(`Game Over, you scored ${score} point${score !== 1 ? 's' : ''}`);
+    }  
+
+    function start(quiz) {
+      let score = 0;
+      
+      for (const [question, answer] of quiz) {
+        const response = ask(question);
+        check(response, answer);
+      }
+      
+      gameOver();
+
+      
+      function ask(question) {
+        return prompt(question);
+      }
+
+      function check(response, answer) {
+        if (response === answer) {
+          alert('Correct!');
+          score++;
+        } else {
+          alert(`Wrong! The correct answer was ${answer}`);
+        }
+      }
+
+      function gameOver() {
+        alert(`Game Over, you scored ${score} point${score !== 1 ? 's' : ''}`);
+      }
+    }
+  </script>
+
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <h1>Examples</h1>
+  <section>
+    <h2>Example 1</h2>
+    <button onclick="askQuestion()">Ask a question</input>
+  </section>
+
+  <section>
+    <h2>Example 2</h2>
+    <button onclick="basicQuiz(quiz)">Quiz me</input>
+  </section>
+
+  <section>
+    <h2>Example 3</h2>
+    <button onclick="start(quiz)">Quiz me functionally</input>
+  </section>
+
+</body>
+
+</html>
