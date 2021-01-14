@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Activity</title>
+  <script>
+    function sumUpTo(){
+      var div = document.getElementById("output");
+      var number = getNumber("firstNumber");
+      if(isNaN(number))
+        return;
+      
+      var sumUp = sumToValue(number);
+      output.innerText = "The sum from 1 to " + number + " is " + sumUp + "\n" + output.innerText;;
+    }
+
+    function sumToValue(lastNumber){
+      let total = 0;
+      for(let i=1; i<=lastNumber; i++){
+        total += i;
+      }
+      return total;
+    }
+
+    function addTogether(){
+      var firstNumber = getNumber("firstNumber");
+      if(isNaN(firstNumber))
+        return;
+
+      var secondNumber = getNumber("secondNumber");
+      if(isNaN(secondNumber))
+        return;
+
+      var sum = firstNumber + secondNumber;
+      output.innerText = "The sum of " + firstNumber + " and " + secondNumber + " is " + sum + "\n" + output.innerText;;
+    }
+
+    var subtractFrom = function(){
+      var firstNumber = getNumber("firstNumber");
+      if(isNaN(firstNumber))
+        return;
+
+      var secondNumber = getNumber("secondNumber");
+      if(isNaN(secondNumber))
+        return;
+
+      var difference = firstNumber - secondNumber;
+      output.innerText = "The difference of " + firstNumber + " and " + secondNumber + " is " + difference + "\n" + output.innerText;;
+    }
+
+    var multiplyFrom = () => {
+      var firstNumber = getNumber("firstNumber");
+      if(isNaN(firstNumber))
+        return;
+
+      var secondNumber = getNumber("secondNumber");
+      if(isNaN(secondNumber))
+        return;
+
+      var product = firstNumber * secondNumber;
+      output.innerText = "The product of " + firstNumber + " and " + secondNumber + " is " + product + "\n" + output.innerText;
+    }
+
+    var modulusFrom = function modulusFrom() {
+      var firstNumber = getNumber("firstNumber");
+      if(isNaN(firstNumber))
+        return;
+
+      var secondNumber = getNumber("secondNumber");
+      if(isNaN(secondNumber))
+        return;
+
+      var modulus = firstNumber % secondNumber;
+      output.innerText = "The modulus of " + firstNumber + " and " + secondNumber + " is " + modulus + "\n" + output.innerText;
+    }
+
+    function getNumber(inputId) {
+      var input = document.getElementById(inputId);
+      var value = input.value;
+      var number = Number.parseInt(value);
+      if(isNaN(number))
+        output.innerText = "The value " + '"' + value + '"' + " is not a number";
+      return number;
+    }
+  </script>
+
+  <style>
+    div {
+      margin: 4px;
+    }
+    button {
+      display: block;
+      margin: 4px;
+    }    
+  </style>
+</head>
+
+<body>
+  <h1>Team Activity - Week 02</h1>
+  <section>
+    <div>
+      <input id="firstNumber">
+      <input id="secondNumber">
+    </div>
+    <div>
+      <button onclick="sumUpTo()">Sum to first number</button>
+      <button onclick="addTogether()">Add numbers</button>
+      <button onclick="subtractFrom()">Subtract numbers</button>
+      <button onclick="multiplyFrom()">Multiple numbers</button>
+      <button onclick="modulusFrom()">Modulus from numbers</button>
+  </div>
+    <div id="output"></div>
+  </section>
+
+  
+
+</body>
+
+</html>
