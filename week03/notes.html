@@ -1,0 +1,99 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Local Storage - Notes</title> 
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="/js/main.js"></script>
+  <script src="js/links.js"></script>
+</head>
+<body>
+ <h1>Notes</h1>
+
+ <h2>this</h2>
+ <ul>
+   <li>The "this" keyword is needed to access members of the parent object from inner scopes because of inherent deficiencies in the language.</li>
+   <li>"this" attempts to make an Javascript objects act more like classes in well structured languages.</li>
+   <li>Be careful when using "this", its behavior is inconsistent across the language.</li>
+   <li>If a function isn't part of an object, using the "this" property will still be consider valid even though it will fail at runtime.</li>   
+   <li>Learn to use "this", it isn't going changing or leaving the language</li>
+ </ul>
+
+ <h2>Objects</h2>
+ <ul>
+   <li>Object are basically untyped dictionaries that can hold primitives, other objects and even functions</li>
+   <li>Create a new object with the following syntax <code>"const person = {};"</code> </li>
+   <li>Access properties with either of the following syntax <code>person.name; person["name"];</code></li>
+   <li>Check to see if a property exists on an object like this <code>person.name !== undefined</code></li>
+   <li>New properties can be added at any time by assigning a value to a new property</li>
+   <li>A property can be removed by using the delete keyword <code>delete person.address;</code></li>
+   <li>Object can be nested, meaning objects can have properties that are also objects</li>
+   <li>Objects are copied by reference</li>
+   <li>Namespacing is simulated by putting similar objects in another object</li>
+   <ul> <h3>Built in Objects or libraries</h3>
+      <li>JSON - for generating and parsing JSON</li>
+      <li>Math - general math functions</li>
+      <li>Date - generic date handling object - can't deal with timezones</li>
+      <li>RegEx - pattern matching library using regular expressions</li>
+   </ul>
+ </ul>
+
+ <h2>DOM - Document Object Model</h2>
+ <ul>
+  <li>The DOM is the html for the page.</li>
+  <li>The DOM is structured as a tree where parent nodes have zero to many children.</li>
+  <li>The DOM is accessed via the <code>document</code> object.</li>
+  <ul>
+    <h3>Shortcuts</h3>
+    <li><code>document.body</code> returns the body element of the page</li>
+    <li><code>document.images</code> returns a list of images on the page</li>
+    <li><code>document.links</code> returns a list of <a> and <area> elements with an href</li>
+    <li><code>document.anchors</code> returns a list of <a> elements with a name</li>
+    <li><code>document.forms</code> returns a list of all forms on the page</li>
+  </ul>
+  <ul>
+    <h3>Getting elements</h3>
+    <li><code>document.getElementById('title');</code> returns the single element with that id</li>
+    <li><code>document.getElementsByTagName('li');</code> returns all elements with that tag name</li>
+    <li><code>document.getElementsByClassName('hero');</code> returns all elements with that include that class</li>
+    <li><code>document.querySelector('#bats');</code> returns all elements that would be affected by that CSS selector</li>
+  </ul>
+  <br>
+  <li><code>myDiv.children</code> returns all direct children of the element in myDiv</li>
+  <li><code>myDiv.firstChild</code> returns the first child of the element in myDiv</li>
+  <li><code>myDiv.lastChild</code> returns the last child of the element in myDiv</li>
+  <li><code>myDiv.nextSibling</code> returns the last child of the element in myDiv</li>
+  <li>use <code>setAttributes</code> and <code>getAttributes</code> to change attributes on an element</li>
+  <li>use <code>myDiv.classList.add/remove</code> to add or remove a class from an element</li>
+  <li>use <code>myDiv.toggle("bold")</code> to add a class to an element if it is missing or remove it if it has the class</li>
+  <li><code>document.createElement('li');</code> will create a new element, a listitem in this case</li>
+  <li><code>myDiv.appendChild(myLi)</code> will add the listitem "myLi" to "myDiv"s children list</li>
+  <li><code>myDiv.removeChild(myLi)</code> will remove the listitem "myLi" from "myDiv"s children list</li>
+  <li><code>myDiv.innerHTML</code> will return all the elements children as a string of HTML</li>
+  <li> a - separated name like <code>background-color</code> can be access via dot notation when you remove the - and use camel casing <code>myDiv.backgroundColor</code></li>
+  
+ </ul>
+
+ <h2>Events</h2>
+ <ul>
+   <li>Events notify you when something occurs instead of you having to constantly poll to see if something happened.</li>
+   <li>Event listeners know when the event happened and will let you know if you register with them.</li>
+   <li>Event registration example <code>document.body.addEventListener("click", doSomething);</code></li>
+   <li>Inline event handler at an attribute on an element <code> onclick="console.log('You Clicked Me!')"</code></li>
+   <li>The event object is the parameter that is passed into to the even handler <code>function doSomething(event) { console.log(event.type); }</code></li>
+   <li>The event object tell you information about the event like which element was clicked, what the mouse coordinates were, what key was pressed</li>
+   <li>Remove an event handler by doing this <code>myDiv.removeEventListener('click',remove);</code></li>
+   <li>You can prevent the default behavior by doing this <code>event.preventDefault();</code> in the event handler</li>
+   <li>Event bubbling is the default way events are handled a clicked event bubbles up from the child to the parent up through the DOM tree</li>
+   <li>Event Capturing makes the even fire on the top parent first, then propagating down to the children</li>
+   <li>Event delegation is when you attach a event handler to a parent element to capture event triggered by its children.</li>
+ </ul>
+
+ <h2>Questions</h2>
+ <ul>
+   <li>I have no questions this week. </li>
+ </ul>
+</body>
+</html>
