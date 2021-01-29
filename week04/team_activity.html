@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Activity - Array Cardio 💪</title>
+  
+  <script>       
+  </script>
+  <style>
+    .board{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;      
+      width: 60%;
+      height: 200px;
+    }
+
+    .board > div {      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 42px;
+    }
+
+    .board :nth-child(1),
+    .board :nth-child(2),
+    .board :nth-child(4),
+    .board :nth-child(5)
+    {
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    .board :nth-child(3),
+    .board :nth-child(6)
+    {      
+      border-bottom: 1px solid black;
+    }
+    
+    .board :nth-child(7),
+    .board :nth-child(8)
+    {
+      border-right: 1px solid black;
+      
+    }
+
+    button {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <h1>Team Activity - Week 04</h1>
+  <h2>Player: <span id="playerNumber"></span>s turn.</h2>
+  <div id="board" class="board">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <button id="resetButton">Restart Game</button>  
+
+ <script src="js/board.js"></script>
+</body>
+
+</html>

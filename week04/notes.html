@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Forms and OOP - Notes</title> 
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="/js/main.js"></script>
+  <script src="js/links.js"></script>
+</head>
+<body>
+ <h1>Notes</h1>
+
+ <h2>Forms</h2>
+ <ul>
+   <li>Forms are the primary way to get data from the user.</li>
+   <li>The "action" attribute is the address the form data will be submitted to.</li>
+   <li>The name attribute allows the form to be accessed directly for example a form with <code>name="search"</code> can be accessed by <code>const form = document.forms['search']</code></li>
+   <li>You get then get all the form elements <code>const formElements = form.elements; </code></li>
+   <li>A single element can be retrieved like this <code>const input = form['searchInput']</code></li>
+   <li>Submit a form by calling <code>form.submit()</code> or having the user click button or input of type "submit"</li>
+   <li>When a form element receives focus the "focus" event is fired, when it loses focus the "blur" event is fired</li>
+   <li>The input event "changed" only fires after the input has be altered AND the element loses focus.</li>
+   <li>An input elements contents are held in the "value" property.</li>
+   <li>Use the "placeholder" attribute on an input element to show an example of what the input expects</li>
+   <li>Labels should have their "for" attribute set to the "id" of the input element they are describing.</li>
+   <li>Checkboxes with the same name attribute (i.e. "powers") can be accessed as an array <code>form.powers[i].value;</code></li>
+   <li>Radio buttons with the same name will have either zero or one value of TRUE </li>
+   <li>Select drop-down lists can have multiple selections if the "multiple" attribute is used</li>
+   <li>The required attribute on a input will force the user to enter something before the form can be submitted</li>
+   <li>Disable the submit button when a form fails validation.</li>
+   <li>Use styling to make validation error more obvious.</li>
+ </ul>
+
+ <h2>Object-Oriented Programming</h2>
+ <ul>
+  <li>Encapsulation - hides logic in the object, exposing simple functions to preform tasks.</li>
+  <li>Polymorphism - different objects can have shared methods, but alter the internal logic as needed.</li>
+  <li>Inheritance - an object can inherit (parent/child) the functionality of another object. The new object can be expanded.</li>
+  <li>Classes - are a blueprint for an object. Prototyping is similar, but it uses instantiated objects for its blueprint.</li>
+  <li>An object with a constructor function will define an object as a function containing other properties and functions.</li> 
+  <li>Create an instance of a constructor function with the "new" keyword: <code>const redDice = new Dice();</code></li>
+  <li>Classes in JS are similar to, but not the same as classes in other programming languages.  They are basically fancy syntax for prototyped objects.</li>
+  <li>A class can have a literal "constructor" function.</li>
+  <li>Class names should be capitalized and pascal case.</li>
+  <li>Static method should be called directly from the class definition, it can't be called from an instantiated object.</li>
+  <li>An objects prototype property can be used to add new methods and properties to an instantiated object. <code>person.prototype.hairColor = "brown";</code></li>
+  <li>A prototype property is the same for all instances of an object (static property in other languages). A object property is specific to the individual object.</li>
+  <li>Assigning a value to a prototype property of an instantiated object makes it unique and a object property.</li>
+  <li>Object properties are public by default.</li>
+  <li>Properties declare inside a class constructor are private.</li>
+  <li>Apply inheritance by using the extends keyword <code>class NinjaTurtle extends Turtle</code></li>
+  <li>When extending use the super method in the class constructor to call the parent constructor</li>
+  <li>Avoid monkey patching.</li> 
+  <li>getters and setters can be created using the "defineProperty" method</li>
+  <li>Mixins are a way to add properties and methods of one object to another object.</li>
+  <li>use the mixin() function over assign() to prevent getting a shallow copy</li>
+  <li>If a method return the "this" object then the method can be chained <code>superman.fly().move().xray()</code></li>
+  <li>To avoid losing the reference to the "this" in nested functions use for-of and "=>" functions</li>
+ </ul>
+
+ <h2>Modular JavaScript</h2>
+ <ul>
+  <li>Properties can be exported using the "export" keyword.  They can either be used on individual properties and functions or they can be used on a list of them</li>
+  <li>Code can be imported with the "import" keyword as follows <code>import { functionName, functionName} from './fileName.js';</code></li>
+  <li>All exported functions from a file can be imported under a name space <code>import * as someNamespace from './someFile.js';</code></li>
+  <li>The "default" keyword can export a single variable or function.</li>
+  <li>Aliases can be used to rename default on import. Once aliased, the alias must always be used.</li>
+</ul>
+
+ <h2>Questions</h2>
+ <ul>
+   <li>I have no questions this week. </li>
+ </ul>
+</body>
+</html>
