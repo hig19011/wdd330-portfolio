@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+
+
+#taskList {
+  padding: 0;
+  margin-bottom: 0;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+
+  .todo {
+    list-style: none;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    font-size: larger;
+    border-bottom: 1px solid black;
+    align-items: center;
+  }
+  
+  .todo:nth-last-child(1) {
+    border-bottom: none;
+  }
+
+  .todo input[type=checkbox] {
+    transform: scale(2);
+    margin:  0 1rem 0 1rem;
+  }
+  
+  .todo .remove-task {
+    font-size: 24px;
+    padding: .4rem .7rem;
+  }
+
+  .todo .remove-task:hover {
+    background-color: lightslategray;
+  }
+
+  .completed .task-detail{
+    text-decoration-line: line-through;    
+  }
+
+
+}
+
+.filter-bar {
+  border: 1px solid black;
+  
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  
+  span {
+    padding: .5rem;
+  }
+
+  .filter-active {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: lightsteelblue;
+  }
+  .filter-active:nth-last-child(1) {    
+    border-right: none;    
+  }
+}
+
+.new-task {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin-top: 1rem;
+
+  #newTask {
+    margin-right: 1rem;
+    font-size: larger;
+  }
+
+  #addTask{
+    font-size: 24px;
+    font-weight: bold;
+    padding: .5rem 1rem;
+    border: 1px solid black;
+  }
+
+  #addTask:hover {
+    background-color: lightslategray;
+  }
+}
+
+
+.btn {
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: lightslategray;
+}

@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+#taskList {
+  padding: 0;
+  margin-bottom: 0;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+
+#taskList .todo {
+  list-style: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto;
+  font-size: larger;
+  border-bottom: 1px solid black;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#taskList .todo:nth-last-child(1) {
+  border-bottom: none;
+}
+
+#taskList .todo input[type=checkbox] {
+  -webkit-transform: scale(2);
+          transform: scale(2);
+  margin: 0 1rem 0 1rem;
+}
+
+#taskList .todo .remove-task {
+  font-size: 24px;
+  padding: .4rem .7rem;
+}
+
+#taskList .todo .remove-task:hover {
+  background-color: lightslategray;
+}
+
+#taskList .completed .task-detail {
+  -webkit-text-decoration-line: line-through;
+          text-decoration-line: line-through;
+}
+
+.filter-bar {
+  border: 1px solid black;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto auto auto;
+      grid-template-columns: 1fr auto auto auto;
+}
+
+.filter-bar span {
+  padding: .5rem;
+}
+
+.filter-bar .filter-active {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: lightsteelblue;
+}
+
+.filter-bar .filter-active:nth-last-child(1) {
+  border-right: none;
+}
+
+.new-task {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto;
+      grid-template-columns: 1fr auto;
+  margin-top: 1rem;
+}
+
+.new-task #newTask {
+  margin-right: 1rem;
+  font-size: larger;
+}
+
+.new-task #addTask {
+  font-size: 24px;
+  font-weight: bold;
+  padding: .5rem 1rem;
+  border: 1px solid black;
+}
+
+.new-task #addTask:hover {
+  background-color: lightslategray;
+}
+
+.btn {
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: lightslategray;
+}
+/*# sourceMappingURL=styles.css.map */
