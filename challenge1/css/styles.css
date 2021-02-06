@@ -36,6 +36,19 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  overflow: hidden;
+}
+
+#taskList .todo.show {
+  -webkit-transition: -webkit-transform 0.6s ease-out;
+  transition: -webkit-transform 0.6s ease-out;
+  transition: transform 0.6s ease-out;
+  transition: transform 0.6s ease-out, -webkit-transform 0.6s ease-out;
+  height: auto;
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
 }
 
 #taskList .todo:nth-last-child(1) {

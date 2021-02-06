@@ -15,10 +15,14 @@ const links = [
     label:"Week 4",
     url: "week04/index.html"
   },
-  // {
-  //   label:"Week 5",
-  //   url: "week05/index.html"
-  // },
+  {
+    label:"Week 5",
+    url: "week05/index.html"
+  },
+  {
+    label:"Challenge Todos",
+    url: "challenge1/index.html"
+  },
   // {
   //   label:"Week 6",
   //   url: "week06/index.html"

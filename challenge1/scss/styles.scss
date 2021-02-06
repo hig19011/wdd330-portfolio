@@ -33,6 +33,13 @@ h1 {
     font-size: larger;
     border-bottom: 1px solid black;
     align-items: center;
+    transform:scaleY(0);
+    overflow:hidden;
+  }
+  .todo.show{
+    transition:transform 0.6s ease-out;
+    height:auto;
+    transform:scaleY(1);
   }
   
   .todo:nth-last-child(1) {

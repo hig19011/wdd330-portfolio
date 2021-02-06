@@ -21,6 +21,9 @@ class Todos {
     let todoElement = this.createTodoElement(todo);
     let taskList = document.getElementById('taskList');
     taskList.appendChild(todoElement);
+    setTimeout(function() {
+      todoElement.classList.toggle("show");
+    }, 10);
   }
 
   newTodo = () => {
@@ -59,6 +62,10 @@ class Todos {
     removeButton.classList.toggle("remove-task");
     todoDiv.appendChild(removeButton);
 
+    if(todo.completed){
+      todoDiv.classList.toggle('completed');
+    }
+
     return todoDiv
   }
 
@@ -77,6 +84,13 @@ class Todos {
   completeTodo = (e,id) => {
     let taskList = document.getElementById('taskList');    
     this.storage.updateTodoStatus(id, e.currentTarget.checked);  
+    for (let i = 0; i < taskList.children.length; i++) {
+      var child = taskList.children[i];
+      if (child.attributes['data-id'] == id) {
+        child.classList.toggle("completed");
+        break;
+      }
+    }
   }
 }
 
