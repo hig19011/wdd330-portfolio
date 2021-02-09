@@ -27,16 +27,17 @@ class Todos {
 
   animatedAddToList = (todo, j = -1) => {
     let newElement = this.createTodoElement(todo);
+    newElement.classList.toggle("hidden");
     if (j == -1) {
       taskList.appendChild(newElement);
     }
     else {
       taskList.insertBefore(newElement, taskList.children[j]);
     }
-    newElement.classList.toggle("hidden");
+   //newElement.classList.toggle("hidden");
     setTimeout(() => {
       newElement.classList.toggle("hidden");
-    }, 1);
+    }, 25);
   }
 
   animatedRemoveFromList = (element) => {
@@ -160,7 +161,7 @@ class Todos {
 
     this.updateTasksLeft();
   }
-  
+
   removeTodo = (e, id) => {
     let todoElement = this.findTodoInTaskList(id);
     if (todoElement != null) {
