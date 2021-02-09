@@ -20,6 +20,11 @@ class Todos {
     let currentFilter = 'all';
   }
 
+  updateTasksLeft = () => {
+    let tasksLeft  = document.getElementById("tasksLeft");
+    tasksLeft.innerText = this.storage.getTodoList().filter(x => x.completed == false).length + " Tasks Left";
+  }
+  
   animatedAddToList = (todo, j=-1) => {
     let newElement = this.createTodoElement(todo);
     if(j == -1){
@@ -43,25 +48,23 @@ class Todos {
 
   setFilter = (filter) => {
     this.currentFilter = filter;
+    this.updateFilterButtons();
     this.updateFilter();
   }
 
-  updateFilter(){
+  updateFilterButtons(){
     switch(this.currentFilter) {
       case "active":
-        this.showActive();
         filterAll.classList.remove("filter-active");
         filterActive.classList.add("filter-active");
         filterCompleted.classList.remove("filter-active");
         break;
-      case "completed":
-        this.showCompleted();
+      case "completed":        
         filterAll.classList.remove("filter-active");
         filterActive.classList.remove("filter-active");
         filterCompleted.classList.add("filter-active");
         break;
-      case "all":
-        this.showAll();
+      case "all":        
         filterAll.classList.add("filter-active");
         filterActive.classList.remove("filter-active");
         filterCompleted.classList.remove("filter-active");
@@ -69,11 +72,23 @@ class Todos {
     }
   }
 
+  updateFilter(){
+    switch(this.currentFilter) {
+      case "active":
+        this.showActive();        
+        break;
+      case "completed":
+        this.showCompleted();        
+        break;
+      case "all":
+        this.showAll();        
+        break;
+    }
+  }
+
   showAll = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    
-    let taskList = document.getElementById('taskList');    
     for (let j = 0; j < todos.length; j++){          
       let todo = todos[j];
       var child = taskList.children[j];
@@ -93,8 +108,7 @@ class Todos {
     todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
     let activeTodos = todos.filter(x=>x.completed == false);   
     let completedTodos = todos.filter(x=>x.completed == true);   
-    let taskList = document.getElementById('taskList');
-    
+        
     for (let i = 0; i < activeTodos.length; i++){   
       let found = false;
       for (let j=0; j<taskList.children.length; j++){
@@ -123,8 +137,7 @@ class Todos {
     let todos = this.storage.getTodoList();
     todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
     let activeTodos = todos.filter(x=>x.completed == false);   
-    let completedTodos = todos.filter(x=>x.completed == true);   
-    let taskList = document.getElementById('taskList');
+    let completedTodos = todos.filter(x=>x.completed == true);       
     
     for (let i = 0; i < completedTodos.length; i++){   
       let found = false;
@@ -157,15 +170,9 @@ class Todos {
     });
 
     this.updateTasksLeft();
-  }
+  } 
 
-  updateTasksLeft = () => {
-    let tasksLeft  = document.getElementById("tasksLeft");
-    tasksLeft.innerText = this.storage.getTodoList().filter(x => x.completed == false).length + " Tasks Left";
-  }
-
-  addTodo = (todo) => {
-    let taskList = document.getElementById('taskList');
+  addTodo = (todo) => {    
     this.animatedAddToList(todo);    
     this.updateTasksLeft();
     this.updateFilter();
@@ -214,8 +221,7 @@ class Todos {
     return todoDiv
   }
 
-  removeTodo = (e, id) => {
-    let taskList = document.getElementById('taskList');
+  removeTodo = (e, id) => {    
     for (let i = 0; i < taskList.children.length; i++) {
       var child = taskList.children[i];
       if (child.attributes['data-id'] == id) {
@@ -227,8 +233,7 @@ class Todos {
     }
   }
 
-  completeTodo = (e,id) => {
-    let taskList = document.getElementById('taskList');    
+  completeTodo = (e,id) => {    
     this.storage.updateTodoStatus(id, e.currentTarget.checked);  
     for (let i = 0; i < taskList.children.length; i++) {
       var child = taskList.children[i];
