@@ -16,21 +16,21 @@ class Todos {
     let filterActive = document.getElementById('filterActive');
     filterActive.addEventListener('click', () => { this.setFilter('active') });
     let filterCompleted = document.getElementById('filterCompleted');
-    filterCompleted.addEventListener('click', () => { this.setFilter('completed') });    
+    filterCompleted.addEventListener('click', () => { this.setFilter('completed') });
     let currentFilter = 'all';
   }
 
   updateTasksLeft = () => {
-    let tasksLeft  = document.getElementById("tasksLeft");
+    let tasksLeft = document.getElementById("tasksLeft");
     tasksLeft.innerText = this.storage.getTodoList().filter(x => x.completed == false).length + " Tasks Left";
   }
-  
-  animatedAddToList = (todo, j=-1) => {
+
+  animatedAddToList = (todo, j = -1) => {
     let newElement = this.createTodoElement(todo);
-    if(j == -1){
+    if (j == -1) {
       taskList.appendChild(newElement);
     }
-    else{
+    else {
       taskList.insertBefore(newElement, taskList.children[j]);
     }
     newElement.classList.toggle("hidden");
@@ -41,7 +41,7 @@ class Todos {
 
   animatedRemoveFromList = (element) => {
     element.classList.toggle("hidden");
-    setTimeout(() => {            
+    setTimeout(() => {
       taskList.removeChild(element);
     }, 333);
   }
@@ -52,19 +52,19 @@ class Todos {
     this.updateFilter();
   }
 
-  updateFilterButtons(){
-    switch(this.currentFilter) {
+  updateFilterButtons() {
+    switch (this.currentFilter) {
       case "active":
         filterAll.classList.remove("filter-active");
         filterActive.classList.add("filter-active");
         filterCompleted.classList.remove("filter-active");
         break;
-      case "completed":        
+      case "completed":
         filterAll.classList.remove("filter-active");
         filterActive.classList.remove("filter-active");
         filterCompleted.classList.add("filter-active");
         break;
-      case "all":        
+      case "all":
         filterAll.classList.add("filter-active");
         filterActive.classList.remove("filter-active");
         filterCompleted.classList.remove("filter-active");
@@ -72,108 +72,116 @@ class Todos {
     }
   }
 
-  updateFilter(){
-    switch(this.currentFilter) {
+  updateFilter() {
+    switch (this.currentFilter) {
       case "active":
-        this.showActive();        
+        this.showActive();
         break;
       case "completed":
-        this.showCompleted();        
+        this.showCompleted();
         break;
       case "all":
-        this.showAll();        
+        this.showAll();
         break;
     }
   }
 
   showAll = () => {
     let todos = this.storage.getTodoList();
-    todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    for (let j = 0; j < todos.length; j++){          
+    todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
+    for (let j = 0; j < todos.length; j++) {
       let todo = todos[j];
       var child = taskList.children[j];
-      if(child === undefined){
+      if (child === undefined) {
         this.animatedAddToList(todo);
         continue;
       }
       if (child.attributes['data-id'] == todo.id) {
         continue;
       }
-      this.animatedAddToList(todo,j);
-    }      
-  }  
+      this.animatedAddToList(todo, j);
+    }
+  }
+
+  findTodoInTaskList = (id) => {
+    for (let j = 0; j < taskList.children.length; j++) {
+      if (taskList.children[j].attributes['data-id'] == id) {
+        return taskList.children[j];
+      }
+    }
+    return null;
+  }
 
   showActive = () => {
     let todos = this.storage.getTodoList();
-    todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    let activeTodos = todos.filter(x=>x.completed == false);   
-    let completedTodos = todos.filter(x=>x.completed == true);   
-        
-    for (let i = 0; i < activeTodos.length; i++){   
-      let found = false;
-      for (let j=0; j<taskList.children.length; j++){
-        if(taskList.children[j].attributes['data-id'] == activeTodos[i].id) {
-          found = true;                  
-        }
-      }
-      if(!found){
+    todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
+    let activeTodos = todos.filter(x => x.completed == false);
+    let completedTodos = todos.filter(x => x.completed == true);
+
+    for (let i = 0; i < activeTodos.length; i++) {
+      if (this.findTodoInTaskList(activeTodos[i].id) == null)
         this.animatedAddToList(activeTodos[i]);
-      }
     }
 
-    for (let i = 0; i < completedTodos.length; i++){   
-      for (let j=0; j<taskList.children.length; j++){
-        if(taskList.children[j].attributes['data-id'] == completedTodos[i].id) {
-          let child = taskList.children[j];
-          this.animatedRemoveFromList(child);  
-          break;
-        }
-      }      
+    for (let i = 0; i < completedTodos.length; i++) {
+      let todoElement = this.findTodoInTaskList(completedTodos[i].id);
+      if (todoElement != null) {
+        this.animatedRemoveFromList(todoElement);
+      }
     }
 
   }
 
   showCompleted = () => {
     let todos = this.storage.getTodoList();
-    todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    let activeTodos = todos.filter(x=>x.completed == false);   
-    let completedTodos = todos.filter(x=>x.completed == true);       
-    
-    for (let i = 0; i < completedTodos.length; i++){   
-      let found = false;
-      for (let j=0; j<taskList.children.length; j++){
-        if(taskList.children[j].attributes['data-id'] == completedTodos[i].id) {
-          found = true;          
-        }
-      }
-      if(!found){
-        this.animatedAddToList(completedTodos[i]);
-      }
+    todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
+    let activeTodos = todos.filter(x => x.completed == false);
+    let completedTodos = todos.filter(x => x.completed == true);
+
+    for (let i = 0; i < completedTodos.length; i++) {
+      if (this.findTodoInTaskList(completedTodos[i].id) == null)
+        this.animatedAddToList(completedTodos[i]);      
     }
 
-    for (let i = 0; i < activeTodos.length; i++){   
-      for (let j=0; j<taskList.children.length; j++){
-        if(taskList.children[j].attributes['data-id'] == activeTodos[i].id) {
-          let child = taskList.children[j];
-          this.animatedRemoveFromList(taskList.children[j]);
-          break;
-        }
+    for (let i = 0; i < activeTodos.length; i++) {
+      let todoElement = this.findTodoInTaskList(activeTodos[i].id);
+      if (todoElement != null) {
+        this.animatedRemoveFromList(todoElement);
       }      
     }
   }
 
   loadTodos = () => {
     let todos = this.storage.getTodoList();
-    todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
+    todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
     todos.forEach(todo => {
       this.addTodo(todo);
     });
 
     this.updateTasksLeft();
-  } 
+  }
+  
+  removeTodo = (e, id) => {
+    let todoElement = this.findTodoInTaskList(id);
+    if (todoElement != null) {
+      this.storage.deleteTodo(id);
+      this.animatedRemoveFromList(todoElement);
+      this.updateTasksLeft();
+    }    
+  }
 
-  addTodo = (todo) => {    
-    this.animatedAddToList(todo);    
+  completeTodo = (e, id) => {
+    this.storage.updateTodoStatus(id, e.currentTarget.checked);
+    let todoElement = this.findTodoInTaskList(id);
+    if (todoElement != null) {
+      todoElement.classList.toggle("completed");
+      this.updateTasksLeft();
+      this.updateFilter();
+    } 
+  }
+
+  addTodo = (todo) => {
+    this.animatedAddToList(todo);
     this.updateTasksLeft();
     this.updateFilter();
   }
@@ -199,7 +207,7 @@ class Todos {
     let completedCheckbox = document.createElement('input');
     completedCheckbox.type = 'checkbox';
     completedCheckbox.checked = todo.completed;
-    completedCheckbox.addEventListener('click', (e) => {this.completeTodo(e,todo.id)})
+    completedCheckbox.addEventListener('click', (e) => { this.completeTodo(e, todo.id) })
     todoDiv.appendChild(completedCheckbox);
 
     let contentSpan = document.createElement('span');
@@ -214,37 +222,13 @@ class Todos {
     removeButton.classList.toggle("remove-task");
     todoDiv.appendChild(removeButton);
 
-    if(todo.completed){
+    if (todo.completed) {
       todoDiv.classList.toggle('completed');
     }
 
     return todoDiv
   }
 
-  removeTodo = (e, id) => {    
-    for (let i = 0; i < taskList.children.length; i++) {
-      var child = taskList.children[i];
-      if (child.attributes['data-id'] == id) {
-        this.storage.deleteTodo(id); 
-        this.animatedRemoveFromList(child);
-        this.updateTasksLeft();
-        break;
-      }
-    }
-  }
-
-  completeTodo = (e,id) => {    
-    this.storage.updateTodoStatus(id, e.currentTarget.checked);  
-    for (let i = 0; i < taskList.children.length; i++) {
-      var child = taskList.children[i];
-      if (child.attributes['data-id'] == id) {
-        child.classList.toggle("completed");
-        this.updateTasksLeft();
-        this.updateFilter();
-        break;
-      }
-    }
-  }
 }
 
 const todo = new Todos();
