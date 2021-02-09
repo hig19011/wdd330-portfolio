@@ -17,12 +17,16 @@ h1 {
   text-align: center;
 }
 
+#container {
+  position: relative;
+}
+
 #taskList {
   padding: 0;
   margin-bottom: 0;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  position: relative;
 }
 
 #taskList .todo {
@@ -32,27 +36,30 @@ h1 {
   -ms-grid-columns: auto 1fr auto;
       grid-template-columns: auto 1fr auto;
   font-size: larger;
-  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transform: scaleY(0);
-          transform: scaleY(0);
+  height: 50px;
+  margin-bottom: 0;
   overflow: hidden;
+  position: relative;
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+  -webkit-transition: margin-bottom .333s ease-in-out, -webkit-transform .333s ease-in-out;
+  transition: margin-bottom .333s ease-in-out, -webkit-transform .333s ease-in-out;
+  transition: margin-bottom .333s ease-in-out, transform .333s ease-in-out;
+  transition: margin-bottom .333s ease-in-out, transform .333s ease-in-out, -webkit-transform .333s ease-in-out;
 }
 
-#taskList .todo.show {
-  -webkit-transition: -webkit-transform 0.6s ease-out;
-  transition: -webkit-transform 0.6s ease-out;
-  transition: transform 0.6s ease-out;
-  transition: transform 0.6s ease-out, -webkit-transform 0.6s ease-out;
-  height: auto;
-  -webkit-transform: scaleY(1);
-          transform: scaleY(1);
-}
-
-#taskList .todo:nth-last-child(1) {
-  border-bottom: none;
+#taskList .todo.hidden {
+  margin-bottom: -50px;
+  -webkit-transform: scale(1, 0);
+          transform: scale(1, 0);
 }
 
 #taskList .todo input[type=checkbox] {

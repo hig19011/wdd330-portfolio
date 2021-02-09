@@ -18,37 +18,45 @@ h1 {
 }
 
 
+#container {
+  position: relative;
+}
 
 #taskList {
   padding: 0;
   margin-bottom: 0;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
+  transition: all .5s ease;
+  position: relative;
 
   .todo {
     list-style: none;
     display: grid;
     grid-template-columns: auto 1fr auto;
     font-size: larger;
-    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+
     align-items: center;
-    transform:scaleY(0);
-    overflow:hidden;
-  }
-  .todo.show{
-    transition:transform 0.6s ease-out;
-    height:auto;
-    transform:scaleY(1);
-  }
-  
-  .todo:nth-last-child(1) {
-    border-bottom: none;
+    
+    height: 50px;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;    
+    transform-origin: 0% 0%;
+    
+    transform: scale(1, 1);
+    transition: margin-bottom .333s ease-in-out, transform .333s ease-in-out;
+  } 
+
+  .todo.hidden {
+    margin-bottom: -50px;
+    transform: scale(1, 0);
   }
 
   .todo input[type=checkbox] {
     transform: scale(2);
-    margin:  0 1rem 0 1rem;
+    margin: 0 1rem 0 1rem;
   }
   
   .todo .remove-task {
