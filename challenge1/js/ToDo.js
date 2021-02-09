@@ -3,16 +3,21 @@ import ls from './ls.js'
 
 
 class Todos {
+
+  filterActive;
+
   constructor() {
     this.storage = new ls();
+    let taskList = document.getElementById('taskList');
     let addTask = document.getElementById('addTask');
     addTask.addEventListener('click', () => { this.newTodo() });
     let filterAll = document.getElementById('filterAll');
-    filterAll.addEventListener('click', () => { this.showAll() });
+    filterAll.addEventListener('click', () => { this.setFilter('all') });
     let filterActive = document.getElementById('filterActive');
-    filterActive.addEventListener('click', () => { this.showActive() });
+    filterActive.addEventListener('click', () => { this.setFilter('active') });
     let filterCompleted = document.getElementById('filterCompleted');
-    filterCompleted.addEventListener('click', () => { this.showCompleted() });
+    filterCompleted.addEventListener('click', () => { this.setFilter('completed') });    
+    let currentFilter = 'all';
   }
 
   animatedAddToList = (todo, j=-1) => {
@@ -27,6 +32,41 @@ class Todos {
     setTimeout(() => {
       newElement.classList.toggle("hidden");
     }, 1);
+  }
+
+  animatedRemoveFromList = (element) => {
+    element.classList.toggle("hidden");
+    setTimeout(() => {            
+      taskList.removeChild(element);
+    }, 333);
+  }
+
+  setFilter = (filter) => {
+    this.currentFilter = filter;
+    this.updateFilter();
+  }
+
+  updateFilter(){
+    switch(this.currentFilter) {
+      case "active":
+        this.showActive();
+        filterAll.classList.remove("filter-active");
+        filterActive.classList.add("filter-active");
+        filterCompleted.classList.remove("filter-active");
+        break;
+      case "completed":
+        this.showCompleted();
+        filterAll.classList.remove("filter-active");
+        filterActive.classList.remove("filter-active");
+        filterCompleted.classList.add("filter-active");
+        break;
+      case "all":
+        this.showAll();
+        filterAll.classList.add("filter-active");
+        filterActive.classList.remove("filter-active");
+        filterCompleted.classList.remove("filter-active");
+        break;
+    }
   }
 
   showAll = () => {
@@ -51,55 +91,62 @@ class Todos {
   showActive = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    
+    let activeTodos = todos.filter(x=>x.completed == false);   
+    let completedTodos = todos.filter(x=>x.completed == true);   
     let taskList = document.getElementById('taskList');
-    for (let j = 0; j < todos.length; j++){          
-      let todo = todos[j];
-      let child = taskList.children[j];
+    
+    for (let i = 0; i < activeTodos.length; i++){   
+      let found = false;
+      for (let j=0; j<taskList.children.length; j++){
+        if(taskList.children[j].attributes['data-id'] == activeTodos[i].id) {
+          found = true;                  
+        }
+      }
+      if(!found){
+        this.animatedAddToList(activeTodos[i]);
+      }
+    }
 
-      if(child === undefined && todo.completed == false){
-        this.animatedAddToList(todo);
-        continue;
-      }
-      else if (child.attributes['data-id'] == todo.id && todo.completed == true) {
-        child.classList.toggle("hidden");                   
-        setTimeout(() => {
-          taskList.removeChild(child);
-        }, 333)
-        continue;
-      }
-      else if (child.attributes['data-id'] == todo.id && todo.completed == false) {
-        continue;
-      }
-      this.animatedAddToList(todo,j);
-    }      
+    for (let i = 0; i < completedTodos.length; i++){   
+      for (let j=0; j<taskList.children.length; j++){
+        if(taskList.children[j].attributes['data-id'] == completedTodos[i].id) {
+          let child = taskList.children[j];
+          this.animatedRemoveFromList(child);  
+          break;
+        }
+      }      
+    }
+
   }
 
   showCompleted = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b)=> { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
-    
+    let activeTodos = todos.filter(x=>x.completed == false);   
+    let completedTodos = todos.filter(x=>x.completed == true);   
     let taskList = document.getElementById('taskList');
-    for (let j = 0; j < todos.length; j++){          
-      let todo = todos[j];
-      let child = taskList.children[j];
+    
+    for (let i = 0; i < completedTodos.length; i++){   
+      let found = false;
+      for (let j=0; j<taskList.children.length; j++){
+        if(taskList.children[j].attributes['data-id'] == completedTodos[i].id) {
+          found = true;          
+        }
+      }
+      if(!found){
+        this.animatedAddToList(completedTodos[i]);
+      }
+    }
 
-      if(child === undefined && todo.completed == true){
-        this.animatedAddToList(todo);
-        continue;
-      }
-      else if (child.attributes['data-id'] == todo.id && todo.completed == false) {
-        child.classList.toggle("hidden");                   
-        setTimeout(() => {
-          taskList.removeChild(child);
-        }, 333)
-        continue;
-      }
-      else if (child.attributes['data-id'] == todo.id && todo.completed == true) {
-        continue;
-      }
-      this.animatedAddToList(todo,j);
-    }         
+    for (let i = 0; i < activeTodos.length; i++){   
+      for (let j=0; j<taskList.children.length; j++){
+        if(taskList.children[j].attributes['data-id'] == activeTodos[i].id) {
+          let child = taskList.children[j];
+          this.animatedRemoveFromList(taskList.children[j]);
+          break;
+        }
+      }      
+    }
   }
 
   loadTodos = () => {
@@ -108,16 +155,20 @@ class Todos {
     todos.forEach(todo => {
       this.addTodo(todo);
     });
+
+    this.updateTasksLeft();
+  }
+
+  updateTasksLeft = () => {
+    let tasksLeft  = document.getElementById("tasksLeft");
+    tasksLeft.innerText = this.storage.getTodoList().filter(x => x.completed == false).length + " Tasks Left";
   }
 
   addTodo = (todo) => {
-    let todoElement = this.createTodoElement(todo);
     let taskList = document.getElementById('taskList');
-    todoElement.classList.toggle("hidden");
-    taskList.appendChild(todoElement);    
-    setTimeout(() => {
-      todoElement.classList.toggle("hidden");
-    }, 1)
+    this.animatedAddToList(todo);    
+    this.updateTasksLeft();
+    this.updateFilter();
   }
 
   newTodo = () => {
@@ -168,11 +219,9 @@ class Todos {
     for (let i = 0; i < taskList.children.length; i++) {
       var child = taskList.children[i];
       if (child.attributes['data-id'] == id) {
-        child.classList.toggle("hidden");        
-        this.storage.deleteTodo(id);        
-        setTimeout(() => {
-          taskList.removeChild(child);
-        }, 333)
+        this.storage.deleteTodo(id); 
+        this.animatedRemoveFromList(child);
+        this.updateTasksLeft();
         break;
       }
     }
@@ -185,6 +234,8 @@ class Todos {
       var child = taskList.children[i];
       if (child.attributes['data-id'] == id) {
         child.classList.toggle("completed");
+        this.updateTasksLeft();
+        this.updateFilter();
         break;
       }
     }
