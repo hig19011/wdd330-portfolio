@@ -71,7 +71,7 @@ h1 {
 
 #taskList .todo .remove-task {
   font-size: 24px;
-  padding: auto .7rem;
+  padding: .5rem .7rem;
 }
 
 #taskList .todo .remove-task:hover {

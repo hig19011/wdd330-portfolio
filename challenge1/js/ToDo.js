@@ -242,11 +242,13 @@ class Todos {
     let completedCheckbox = document.createElement('input');
     completedCheckbox.type = 'checkbox';
     completedCheckbox.checked = todo.completed;
+    completedCheckbox.id = todo.id;
     completedCheckbox.addEventListener('click', (e) => { this.completeTodo(e, todo.id) })
     todoDiv.appendChild(completedCheckbox);
 
-    let contentSpan = document.createElement('span');
+    let contentSpan = document.createElement('label');
     contentSpan.classList.toggle("task-detail");
+    contentSpan.setAttribute('for', todo.id )
     contentSpan.innerText = todo.content;
     todoDiv.appendChild(contentSpan);
 
