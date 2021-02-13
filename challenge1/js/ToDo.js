@@ -4,11 +4,17 @@ import ls from './ls.js'
 
 class Todos {
 
-  filterActive;
-
+  
+  // setup event listeners and class properties
   constructor() {
     this.storage = new ls();
     let taskList = document.getElementById('taskList');
+    let newTask = document.getElementById('newTask');
+    newTask.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') {
+        this.newTodo();
+      }
+    })
     let addTask = document.getElementById('addTask');
     addTask.addEventListener('click', () => { this.newTodo() });
     let filterAll = document.getElementById('filterAll');
@@ -20,11 +26,14 @@ class Todos {
     let currentFilter = 'all';
   }
 
+  // update the visual active todo count, used when todo is added, removed or completed/uncompleted
   updateTasksLeft = () => {
     let tasksLeft = document.getElementById("tasksLeft");
     tasksLeft.innerText = this.storage.getTodoList().filter(x => x.completed == false).length + " Tasks Left";
   }
 
+  // set j to -1 when added to the end of the list 
+  // otherwise set j to the index position for insertion
   animatedAddToList = (todo, j = -1) => {
     let newElement = this.createTodoElement(todo);
     newElement.classList.toggle("hidden");
@@ -34,12 +43,13 @@ class Todos {
     else {
       taskList.insertBefore(newElement, taskList.children[j]);
     }
-   //newElement.classList.toggle("hidden");
+    // start the animation after the browser has had time to update the DOM  
     setTimeout(() => {
       newElement.classList.toggle("hidden");
     }, 25);
   }
 
+  // update the class and remove the element when the animation is complete.
   animatedRemoveFromList = (element) => {
     element.classList.toggle("hidden");
     setTimeout(() => {
@@ -47,12 +57,14 @@ class Todos {
     }, 333);
   }
 
+  // apply a filter to the system
   setFilter = (filter) => {
     this.currentFilter = filter;
     this.updateFilterButtons();
     this.updateFilter();
   }
 
+  // update styles on filter buttons depending on which is selected
   updateFilterButtons() {
     switch (this.currentFilter) {
       case "active":
@@ -73,6 +85,7 @@ class Todos {
     }
   }
 
+  // filter actual html list  
   updateFilter() {
     switch (this.currentFilter) {
       case "active":
@@ -87,6 +100,11 @@ class Todos {
     }
   }
 
+  // add any items that aren't in the list inserted in creation order
+  // if the html element in the current index doesn't have the same id
+  // then it belongs later in the list and can be safely pushed down
+  // this could be simpler by clear all item and just inserting actives
+  // it was done in this manner to get the visual folding effect when changing filters
   showAll = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
@@ -104,6 +122,7 @@ class Todos {
     }
   }
 
+  // get the html element hold the todo with a given id
   findTodoInTaskList = (id) => {
     for (let j = 0; j < taskList.children.length; j++) {
       if (taskList.children[j].attributes['data-id'] == id) {
@@ -113,6 +132,10 @@ class Todos {
     return null;
   }
 
+  // insert active todos in order, if they aren't already in the list
+  // remove any completed tasks
+  // this could be simpler by clear all item and just inserting actives
+  // it was done in this manner to get the visual folding effect when changing filters
   showActive = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
@@ -133,6 +156,10 @@ class Todos {
 
   }
 
+  // insert completed todos in order, if they aren't already in the list
+  // remove any active tasks
+  // this could be simpler by clear all item and just inserting actives
+  // it was done in this manner to get the visual folding effect when changing filters
   showCompleted = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
@@ -152,6 +179,7 @@ class Todos {
     }
   }
 
+  // load initial todo list
   loadTodos = () => {
     let todos = this.storage.getTodoList();
     todos.sort((a, b) => { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0 });
@@ -162,6 +190,7 @@ class Todos {
     this.updateTasksLeft();
   }
 
+  // remove a specific todo by id
   removeTodo = (e, id) => {
     let todoElement = this.findTodoInTaskList(id);
     if (todoElement != null) {
@@ -171,6 +200,7 @@ class Todos {
     }    
   }
 
+  // mark a todo as completed, update storage and update filtered list
   completeTodo = (e, id) => {
     this.storage.updateTodoStatus(id, e.currentTarget.checked);
     let todoElement = this.findTodoInTaskList(id);
@@ -181,12 +211,14 @@ class Todos {
     } 
   }
 
+  // a todo to the list
   addTodo = (todo) => {
     this.animatedAddToList(todo);
     this.updateTasksLeft();
     this.updateFilter();
   }
 
+  // mange creation of new todo and add it to the list
   newTodo = () => {
     let taskDetail = document.getElementById("newTask");
     let todo = this.createTodo(Date.now(), taskDetail.value, false);
@@ -195,11 +227,13 @@ class Todos {
     taskDetail.value = '';
   }
 
+  // create the actual todo
   createTodo = (id, content, completed) => {
     let todo = { id: id, content: content, completed: completed };
     return todo;
   }
 
+  // create html to display todo information
   createTodoElement = (todo) => {
     let todoDiv = document.createElement('div');
     todoDiv.classList.toggle('todo');
@@ -232,6 +266,7 @@ class Todos {
 
 }
 
+// do it!
 const todo = new Todos();
 todo.loadTodos();
 

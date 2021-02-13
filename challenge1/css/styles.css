@@ -8,9 +8,9 @@ html, body {
 }
 
 body {
-  padding: 1rem;
   max-width: 600px;
   margin: 0 auto;
+  background-color: #f4f4f4;
 }
 
 h1 {
@@ -19,6 +19,7 @@ h1 {
 
 #container {
   position: relative;
+  padding: 2rem;
 }
 
 #taskList {
@@ -35,14 +36,14 @@ h1 {
   display: grid;
   -ms-grid-columns: auto 1fr auto;
       grid-template-columns: auto 1fr auto;
-  font-size: larger;
+  font-size: 18px;
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 50px;
+  height: 45px;
   margin-bottom: 0;
   overflow: hidden;
   position: relative;
@@ -57,7 +58,7 @@ h1 {
 }
 
 #taskList .todo.hidden {
-  margin-bottom: -50px;
+  margin-bottom: -45px;
   -webkit-transform: scale(1, 0);
           transform: scale(1, 0);
 }
@@ -70,7 +71,7 @@ h1 {
 
 #taskList .todo .remove-task {
   font-size: 24px;
-  padding: .4rem .7rem;
+  padding: auto .7rem;
 }
 
 #taskList .todo .remove-task:hover {
@@ -110,11 +111,12 @@ h1 {
   -ms-grid-columns: 1fr auto;
       grid-template-columns: 1fr auto;
   margin-top: 1rem;
+  font-size: 18px;
+  grid-column-gap: .5rem;
 }
 
 .new-task #newTask {
-  margin-right: 1rem;
-  font-size: larger;
+  font-size: 18px;
 }
 
 .new-task #addTask {
@@ -135,5 +137,19 @@ h1 {
 
 .btn:hover {
   background-color: lightslategray;
+}
+
+@media screen and (min-width: 601px) {
+  body {
+    background-color: white;
+    padding: 2rem;
+  }
+  #container {
+    position: relative;
+    padding: 2rem;
+    background-color: #f4f4f4;
+    -webkit-box-shadow: 0px 0px 10px 1px #222222;
+            box-shadow: 0px 0px 10px 1px #222222;
+  }
 }
 /*# sourceMappingURL=styles.css.map */
