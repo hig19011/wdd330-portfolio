@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Advanced functions and Ajax - Notes</title> 
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="/js/main.js"></script>
+  <script src="js/links.js"></script>
+</head>
+<body>
+ <h1>Notes</h1>
+
+ <h2>Forms</h2>
+ <ul>
+  <li>JavaScript functions can have properties and methods within themselves.</li>
+  <li>A functions length property indicates how many parameters a function has.</li>
+  <li>The "this" object is always the first method of any function. The "call" method of the function can be use to set or override the "this" object.</li>
+  <li>Custom properties can be added to function, as needed.</li>
+  <li>Memoization is a pattern for saving values that are expensive to compute into a cache, which can be reused later for the same parameters.</li>
+  <li>IIFE or Immediately Invoked Function Expressions are functions with an extra set of parentheses at the end to execute the function when they are defined.  They are often used to keep the global namespace clean.</li>
+  <li>Variables in an IIFE are a way to create temporary variables that are released when the function goes out of scope.</li>
+  <li>IIFEs are good for initialization code, run once, since the variable and functions go away after completion.</li>
+  <li>With ES6 use a block scope, code in a pair of {}, will have the same scope effect as an IIFE when using const and let (instead of var)</li>
+  <li>IIFE can be used to segregate code that uses "use strict" from code that doesn't</li>
+  <li>A function can redefine itself from within itself.</li>
+  <li>Function redefinition can be used to set the code used at runtime based on available features</li>
+  <li>A recursive function will call itself repeatedly until a certain condition is met.</li>
+ </ul>
+
+ <h2>Callbacks and Promises</h2>
+ <ul>
+  <li>JavaScript is limited to one thread, max, to process code</li>
+  <li>Events with Callbacks and Promises are a way to prevent thread blocking in a single threaded environment.</li>
+  <li>Callbacks are often used to get around blocking process like waiting for a http request to return.</li>
+  <li>Callback Hell is when you find multiple callback nested inside other callbacks.  It becomes very difficult to reason about.</li>
+  <li>Promises help to ease the pain that comes from Callbacks.</li>
+  <li>Promise constructors take a function with two parameter, each functions commonly called "resolve" and "reject".</li>
+  <li>Promises that are successful should call the resolve function, if they fail in some way then they call the reject function.</li>
+  <li>When a promise is resolved it will return a value that will run either a "then" method on success or a "catch" method on failure.</li>
+  <li>Promises can be chained. When chained between "then" methods, each promise will run consecutively.  Each then method is a new promise.</li>
+  <li>
+    For example: 
+    <pre>
+      <code>login(userName)
+        .then(user => getPlayerInfo(user.id))
+        .then(info => loadGame(info))
+        .catch( throw error)</code>
+    </pre>
+  </li>
+  <li>A newer solution uses the async/await pattern similar to what can be found in C#.  It is much easier to reason about.</li>
+ </ul>
+
+ <h2>Other Functional things</h2>
+ <ul>
+   <li>Generalize functions are take optional parameters and/or functions as parameters to be used as part of the calculation.  Theoretically making the function more flexible, but at a cost of simplicity. </li>
+   <li>Function can also return functions.  This is an unfortunate way to bury control logic in child functions, unless carefully used in a factory pattern or some other well defined manner.</li>
+   <li>Closures are a way to keep access to variables in different scopes within a function. Classes naturally give this ability, where closures fake it making it harder to reason about.</li>
+   <li>Generators are basically the same as an Enumerator in C#.  They use a yield keyword to return the next value as needed.  This is often used when streaming data and there are delays due to IO latency.</li> 
+   <li>Functional programming is the almost the opposite of OOP.  The "pure functions" only operate on the data that is passed in.  This means that they will have the same result for the same parameters every time they are run.  The functions always a return a new object, not a modified version of the original.  This protects the code from bugs due to "side effects", or changes in state in a class, a regular problem encountered in OOP.  These features also lends functional programming to be very robust for parallel processing programming, not a benefit to single threaded JavaScript, but still important to note.</li>
+   <li>Currying is a way to take a partial set of parameters for a function and return another function that needs the rest of the parameters later, instead of a final result.  It allows things like a frequently used parameter to be entered once and later the remaining parameter to be entered when the result is needed. </li>
+ </ul>
+
+ <h2>Ajax</h2>
+ <ul>
+  <li>Ajax stand for Asynchronous JavaScript and XML.</li>
+  <li>This is the primary technology that allows web pages to be updated dynamically with new data, or without refreshing the page, and without locking up the browser/page.</li>
+  <li>JavaScript is usually used to make the Ajax calls to a server for data</li>
+  <li>XML was the format originally used to transmit the data, but today JSON has become dominate.</li>
+  <li>Today most people use the Fetch API to send and retrieve data.  Fetch returns promises avoiding the need for callbacks.</li>
+  <li>The Fetch response has an "ok" property (boolean) that indicates if the call was successful or not.</li>
+  <li>If the ok property is false the called failed and more details can be found in the "statusText" property.</li>
+  <li>Sometime the call sends back a redirect url which you can call to get the newest or more appropriate source.</li>
+  <li>There are several primary HTTP verbs used today</li>
+    <ul>
+      <li>GET - retrieves data, shouldn't make changes to the data source</li>
+      <li>PUT - changes the data source in an idempotent way.  If you do the same PUT call with the same data ten times, it should have the end result as if it where only called once.</li>
+      <li>POST - change the data source in so that each call continues to alter the data beyond what the first called did. Also a catch all for commands to the server.</li>
+      <li>PATCH - a partial update to the data source.</li>
+      <li>DELETE - tells the data source to remove a given record.</li>
+    </ul>  
+    
+ </ul>
+ 
+ <h2>Questions</h2>
+ <ul>
+   <li>I may have questions after getting some more time to work with classes, mixins and imports, but right now I have no questions. </li>
+ </ul>
+</body>
+</html>

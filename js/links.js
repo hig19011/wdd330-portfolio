@@ -23,14 +23,10 @@ const links = [
     label:"Challenge Todos",
     url: "challenge1/index.html"
   },
-  // {
-  //   label:"Week 6",
-  //   url: "week06/index.html"
-  // },
-  // {
-  //   label:"Week 7",
-  //   url: "week07/index.html"
-  // },
+  {
+    label:"Week 7",
+    url: "week07/index.html"
+  },
   // {
   //   label:"Week 8",
   //   url: "week08/index.html"
