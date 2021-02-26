@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Advanced functions and Ajax - Notes</title> 
+  <link rel="stylesheet" href="../css/styles.css" />  
+  <script src="js/links.js"></script>
+</head>
+<body>
+ <h1>Notes</h1>
+
+ <h2>Transformations</h2>
+ <ul>
+  <h3>Transforms</h3>
+  <li>The transform property allows you to translate, rotate, scale and skew any element on the page. This is a static, one time change.</li>  
+  <li>Transformations are nice because they only move the element, they don't cause the rest of the document to change.</li>
+  <li>Only declare on transform per element. Additional ones will overwrite the previous entries.</li> 
+  <li>Translation allows you to move elements left, right, up and down.</li>  
+  <li>Translations do not work on "inline" elements.  Change inline elements to "inline-block" for them to function.</li> 
+  <li>Scaling will grow or shrink an element along each axis.</li>
+  <li>Rotation will rotate the by degrees, grads, radians or "turns" on the z-axis.</li>
+  <li>Skewing will slant the element along each axis.</li>
+  <li>Elements will grow/shrink and rotate from its center point by default.</li>
+  <li>You can change the transformation origin with the <code>transform-origin</code> property.  This allows you to rotate an object around the a different point on the element like the top, so it looks like the element rotates around the top of the element.</li> 
+  <li>The <strong>order</strong> of transforms is important! Translating then rotating will have a very different affect than rotating then translating</li>
+  <h3>Transitions</h3>
+  <li>Transitions are a way to animate visual changes to an element, include transformations.</li>
+  <li>They allow the value of CSS properties to change over time.</li>
+  <li>Basic steps to creating a transition.</li>
+  <ol>
+    <li>Declare the original state of the element in the default style declaration.</li>
+    <li>Declare the final state of your transitioned element; for example, a :hover state.</li>
+    <li>Include the transition functions in your default style declaration using the transition properties, including: transition-property , transition-duration , transition-timing-function , and transition-delay . We’ll look at each of these and how they work shortly.</li>
+  </ol>
+  <li>The important point to note is that the transition is declared in the default or originating state.</li>
+  <li>The transition-property property declares all of the CSS properties of the element that should be transitioned. The <code>all</code> keyword for all properties is the default.</li>
+  <li>The transition-duration property takes the value for how long an animation should take in either seconds (s) or milliseconds(ms)</li>
+  <li>Most animations should take about 200ms. Going slower can make the site feel sluggish, going faster can go unnoticed.</li>
+  <li>The transition-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end.</li>
+  <li>The transition-delay property can cause the animation to delay play for a set amount of time.</li>
+  <li>All of the transition properties can be combined on a single line.</li>
+  <li>For transitions with multiple phases, comma separate pairs of properties</li>
+ </ul>
+
+ <h2>Animations</h2>
+ <ul>
+   <li>Animations allow more control than transitions via Keyframes</li>
+   <li>Keyframes are multiple steps through an animations.</li>
+   <li>The Keyframe keyword "from" and "to" represent the start and end of the animation or 0% and 100% of the animation time</li>
+   <li>You can define as many keyframes as you need.</li>
+   <li>The animation-name property is use to attach an animation to an element.</li>
+   <li>The animation-duration property defines how long the animation takes to complete.</li>
+   <li>The animation-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end</li>
+   <li>The animation-iteration-count property dictates how many times to loop through the animation.  The value of "infinite" is a continuous loop.</li>
+   <li>The animation-direction property say if the animation runs forward or in reverse.  The value of alternate make the animation run forwards then in reverse.</li>
+   <li>The animation-delay property will make the animate wait after triggered for a given time frame before playing.</li>
+   <li>The animation property is the shorthand version that will let you set all of the properties on a single line.</li>
+ </ul>
+
+ <h2>Questions</h2>
+ <ul>
+   <li></li>
+ </ul>
+</body>
+</html>
