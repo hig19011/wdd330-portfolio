@@ -9,59 +9,102 @@
   <script src="js/links.js"></script>
 </head>
 <body>
- <h1>Notes</h1>
+  <h1>Notes</h1>
 
- <h2>Transformations</h2>
- <ul>
-  <h3>Transforms</h3>
-  <li>The transform property allows you to translate, rotate, scale and skew any element on the page. This is a static, one time change.</li>  
-  <li>Transformations are nice because they only move the element, they don't cause the rest of the document to change.</li>
-  <li>Only declare on transform per element. Additional ones will overwrite the previous entries.</li> 
-  <li>Translation allows you to move elements left, right, up and down.</li>  
-  <li>Translations do not work on "inline" elements.  Change inline elements to "inline-block" for them to function.</li> 
-  <li>Scaling will grow or shrink an element along each axis.</li>
-  <li>Rotation will rotate the by degrees, grads, radians or "turns" on the z-axis.</li>
-  <li>Skewing will slant the element along each axis.</li>
-  <li>Elements will grow/shrink and rotate from its center point by default.</li>
-  <li>You can change the transformation origin with the <code>transform-origin</code> property.  This allows you to rotate an object around the a different point on the element like the top, so it looks like the element rotates around the top of the element.</li> 
-  <li>The <strong>order</strong> of transforms is important! Translating then rotating will have a very different affect than rotating then translating</li>
-  <h3>Transitions</h3>
-  <li>Transitions are a way to animate visual changes to an element, include transformations.</li>
-  <li>They allow the value of CSS properties to change over time.</li>
-  <li>Basic steps to creating a transition.</li>
-  <ol>
-    <li>Declare the original state of the element in the default style declaration.</li>
-    <li>Declare the final state of your transitioned element; for example, a :hover state.</li>
-    <li>Include the transition functions in your default style declaration using the transition properties, including: transition-property , transition-duration , transition-timing-function , and transition-delay . We’ll look at each of these and how they work shortly.</li>
-  </ol>
-  <li>The important point to note is that the transition is declared in the default or originating state.</li>
-  <li>The transition-property property declares all of the CSS properties of the element that should be transitioned. The <code>all</code> keyword for all properties is the default.</li>
-  <li>The transition-duration property takes the value for how long an animation should take in either seconds (s) or milliseconds(ms)</li>
-  <li>Most animations should take about 200ms. Going slower can make the site feel sluggish, going faster can go unnoticed.</li>
-  <li>The transition-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end.</li>
-  <li>The transition-delay property can cause the animation to delay play for a set amount of time.</li>
-  <li>All of the transition properties can be combined on a single line.</li>
-  <li>For transitions with multiple phases, comma separate pairs of properties</li>
- </ul>
+  <h2>Transformations</h2>
+  <ul>
+    <h3>Transforms</h3>
+    <li>The transform property allows you to translate, rotate, scale and skew any element on the page. This is a static, one time change.</li>  
+    <li>Transformations are nice because they only move the element, they don't cause the rest of the document to change.</li>
+    <li>Only declare on transform per element. Additional ones will overwrite the previous entries.</li> 
+    <li>Translation allows you to move elements left, right, up and down.</li>  
+    <li>Translations do not work on "inline" elements.  Change inline elements to "inline-block" for them to function.</li> 
+    <li>Scaling will grow or shrink an element along each axis.</li>
+    <li>Rotation will rotate the by degrees, grads, radians or "turns" on the z-axis.</li>
+    <li>Skewing will slant the element along each axis.</li>
+    <li>Elements will grow/shrink and rotate from its center point by default.</li>
+    <li>You can change the transformation origin with the <code>transform-origin</code> property.  This allows you to rotate an object around the a different point on the element like the top, so it looks like the element rotates around the top of the element.</li> 
+    <li>The <strong>order</strong> of transforms is important! Translating then rotating will have a very different affect than rotating then translating</li>
+    <h3>Transitions</h3>
+    <li>Transitions are a way to animate visual changes to an element, include transformations.</li>
+    <li>They allow the value of CSS properties to change over time.</li>
+    <li>Basic steps to creating a transition.</li>
+    <ol>
+      <li>Declare the original state of the element in the default style declaration.</li>
+      <li>Declare the final state of your transitioned element; for example, a :hover state.</li>
+      <li>Include the transition functions in your default style declaration using the transition properties, including: transition-property , transition-duration , transition-timing-function , and transition-delay . We’ll look at each of these and how they work shortly.</li>
+    </ol>
+    <li>The important point to note is that the transition is declared in the default or originating state.</li>
+    <li>The transition-property property declares all of the CSS properties of the element that should be transitioned. The <code>all</code> keyword for all properties is the default.</li>
+    <li>The transition-duration property takes the value for how long an animation should take in either seconds (s) or milliseconds(ms)</li>
+    <li>Most animations should take about 200ms. Going slower can make the site feel sluggish, going faster can go unnoticed.</li>
+    <li>The transition-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end.</li>
+    <li>The transition-delay property can cause the animation to delay play for a set amount of time.</li>
+    <li>All of the transition properties can be combined on a single line.</li>
+    <li>For transitions with multiple phases, comma separate pairs of properties</li>
+  </ul>
 
- <h2>Animations</h2>
- <ul>
-   <li>Animations allow more control than transitions via Keyframes</li>
-   <li>Keyframes are multiple steps through an animations.</li>
-   <li>The Keyframe keyword "from" and "to" represent the start and end of the animation or 0% and 100% of the animation time</li>
-   <li>You can define as many keyframes as you need.</li>
-   <li>The animation-name property is use to attach an animation to an element.</li>
-   <li>The animation-duration property defines how long the animation takes to complete.</li>
-   <li>The animation-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end</li>
-   <li>The animation-iteration-count property dictates how many times to loop through the animation.  The value of "infinite" is a continuous loop.</li>
-   <li>The animation-direction property say if the animation runs forward or in reverse.  The value of alternate make the animation run forwards then in reverse.</li>
-   <li>The animation-delay property will make the animate wait after triggered for a given time frame before playing.</li>
-   <li>The animation property is the shorthand version that will let you set all of the properties on a single line.</li>
- </ul>
+  <h2>Animations</h2>
+  <ul>
+    <li>Animations allow more control than transitions via Keyframes</li>
+    <li>Keyframes are multiple steps through an animations.</li>
+    <li>The Keyframe keyword "from" and "to" represent the start and end of the animation or 0% and 100% of the animation time</li>
+    <li>You can define as many keyframes as you need.</li>
+    <li>The animation-name property is use to attach an animation to an element.</li>
+    <li>The animation-duration property defines how long the animation takes to complete.</li>
+    <li>The animation-timing-function property allows you to vary the pace of the animation from start to end.  For example, you can make the animation start slow and speed up towards the end</li>
+    <li>The animation-iteration-count property dictates how many times to loop through the animation.  The value of "infinite" is a continuous loop.</li>
+    <li>The animation-direction property say if the animation runs forward or in reverse.  The value of alternate make the animation run forwards then in reverse.</li>
+    <li>The animation-delay property will make the animate wait after triggered for a given time frame before playing.</li>
+    <li>The animation property is the shorthand version that will let you set all of the properties on a single line.</li>
+  </ul>
 
- <h2>Questions</h2>
- <ul>
-   <li></li>
- </ul>
+  <h2>Canvas</h2>
+  <ul>
+    <li>Canvas is a way to draw 2d vector graphic on a web page.</li>
+    <li>The Canvas element is the only element needed to work with canvas.  The remainder of the work is done in JavaScript.</li>
+    <li>Set the height and width attributes in the canvas element to set the actual size of the canvas object.  The CSS properties only change the size of the containing box.</li>
+    <li>The "context" is where the drawing is rendered.</li>
+    <li>Set both the strokeStyle and fillStyle properties on the context before drawing anything.</li>
+    <li>Canvas's basic coordinate system starts with a point on the top left and ends with a point on bottom right.</li>
+    <li>The fillStyle can be solid colors, gradients and images.</li>
+    <li>When using images, apply the image to the canvas using the images "onload" function to make sure the image is downloaded before attempting to use it.</li>
+    <li>Linear Gradients are define with the top/left and bottom right coordinates and two or more "ColorStops" to help define the color migration</li>
+    <li>Shapes that aren't rectangles are created using "paths"</li>
+    <li>A circle can be created using an "Arc" which takes X and Y coordinates, radius, start and end angle, and direction of rotation (i.e. clockwise). </li>
+    <li>Note: 1 radian is 180 degrees or half a circle.</li>
+    <li>Arc must also have a stroke or fill style to be seen.</li>
+    <li>Canvas drawing can be save as images, in png format.</li>
+    <li>Images drawn with canvas can be manipulated, such as the color of each pixel can be changed. For example you can turn a color image into a black and white one.</li>
+    <li>Video can all be drawn and manipulated in canvas. For example you can overlay text on the video.</li>
+    <li>Canvas has no accessability features and will be invisible to screen readers.</li>    
+  </ul>
+
+  <h2>SVG</h2>
+  <ul>
+    <li>SVG stands for Scalable Vector Graphics, which are recorded in an XML format, and are another way to draw on a web page.</li>
+    <li>SVG can be seen by screen readers.</li>
+    <li>SVG has more basic shapes available via dedicated functions, like circles.</li>
+    <li>It is usually better to make SVG's in a 3rd party editor like Illustrator, than to code them manually.</li>
+    <li>You can modify the properties of SVG via CSS and Javascript.</li>
+  </ul>
+
+  <h2>Drag and Drop</h2>
+  <ul>
+    <li>This feature lets you move elements on the web page with your mouse or finger.</li>
+    <li>It can be used in combination with the File API to drag file from a folder onto the web page for usage or upload.</li>
+    <li>There are three steps to enabling drag and drop.</li>
+    <ul>
+      <li>Set the "draggable" attribute on the HTML elements to be mobile to "true"</li>
+      <li>Add the event handlers for "dragstart" to all elements you want to drag.</li>
+      <li>Add the event handlers for "dragover" and "drop" events on any elements that will take the dropped items.</li>
+    </ul>
+    <li>The DataTransfer object can be used to hold and retrieve information about the dragged elements. For example, the Id of the entity being moved, not the HTML element.</li>    
+  </ul>
+
+  <h2>Questions</h2>
+  <ul>
+    <li>I will need more of an opportunity to work with these concept before I have any questions.  I expect they will be part of next weeks Team Activity.</li>
+  </ul>
 </body>
 </html>
