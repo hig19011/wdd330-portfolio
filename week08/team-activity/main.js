@@ -1,6 +1,7 @@
 
 class StarWarsFacts {
 getPeople = (url) => {
+  url = url.replace("http:","https:");
   var result = fetch(url)
   .then(response => {
     if(!response.ok){
