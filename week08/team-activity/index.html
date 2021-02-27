@@ -9,13 +9,28 @@
   </head>
 
   <body>
-    <main>
+    <header>
       <h1>Star Wars Facts</h1>
+    </header>
+    <main>
+      <div class="listTitle">
+        <h2>Star Wars Characters</h2>
+        <span>Click to see details</span>
+      </div>
       <ul id="people" class="people">
         
       </ul>
-      <button id="previousButton">Previous</button>
-      <button id="nextButton">Next</button>
+      <div class="actions">
+        <button id="previousButton">Previous</button>
+        <button id="nextButton">Next</button>
+        <select id="pagesList"></select>
+        <button id="gotoPage">Go To Page</button>
+      </div>
+      <section id="details" class="hide-modal">
+        <p>Test 1</p>
+        <p>Test 2</p>
+        <p>Test 3</p>
+      </section>
     </main>
 
 
