@@ -63,7 +63,7 @@ buildPeopleListing = (people) => {
   }
  
   let goto = document.getElementById('gotoPage');
-  goto.onclick = () => { this.getPeople(peopleUrl+"/?page="+pagesList.value) }
+  goto.onclick = () => { this.getPeople(peopleUrl+"?page="+pagesList.value) }
 
 }
 
@@ -112,7 +112,7 @@ showDetails = (person) => {
 
 }
 
-const peopleUrl = 'https://swapi.dev/api/people';
+const peopleUrl = 'https://swapi.dev/api/people/';
 var facts = new StarWarsFacts();
 facts.getPeople(peopleUrl);
 
