@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Advanced functions and Ajax - Notes</title> 
+  <link rel="stylesheet" href="../css/styles.css" />  
+  <script src="js/links.js"></script>
+</head>
+<body>
+  <h1>Notes</h1>
+
+  <h2>Window object</h2>
+  <ul>
+    <li>The Browser Object Model (BOM) hold information about the browser and computer screen.</li>  
+    <li>Global variables are properties of the <code>window</code> object.  It is the ultimate parent object in a browser.</li>
+    <li>Some methods like the dialogs <code>alert()</code>, <code>confirm()</code>, and <code>prompt()</code> are also part of the window object.</li>
+    <li>Avoid these dialogs.  They stop all code from processing on the web page while they are open and are often considered annoying to the user.</li>
+    <li>The <code>window.navigator.userAgent</code> property will return information about the browser</li>
+    <li>The <code>window.location</code> property contains information like the full URL and breaks it down into different parts like the used protocol (i.e. https), host, port and pathname.</li>
+    <li>The location object can but used to reload and redirect the page.</li>
+    <li>The window.history object will tell you the history leading up to the page and let you move forward and backwards through the historical pages.</li>
+    <li>The window.open method will open a new window with a given size and address. Often considered a popup window and should be used sparingly.</li>
+    <li>The window.move method will let you move the window around the screen.</li>
+    <li>The window.resizeTo method will let change the size of the window.</li>
+    <ul>
+      <h3>window.screen</h3>
+      <li>The window.screen method will give you information about the physical screen that holds the browser.</li>
+      <li>It's height and width properties will give you the dimensions of the screen.</li>
+      <li>The availWidth and availHeight properties give the screen dimensions after the space taken by OS menus</li>
+      <li>The colorDepth property gives the color depth of the screen, typically, 24, but can be 16 or 8 on very old or specialized devices.</li>
+    </ul>  
+    <li>The window.document object has methods and properties that allow you to interact with the page.</li>
+    <li>The document.write method will set the document to whatever you enter, replace the contents of web page in the browser.  If used inside a pair of "script" tags it will inject the text instead of over writing the document.</li>
+    <ul>
+      <h3>Cookies</h3>
+      <li>Cookies are small files saved in the browser.  They are used to save "state".</li>
+      <li>Cookies can only be read from the same domain that created them.</li>
+      <li>Create a cookie by assigning it with string with a key/value pair. <code>document.cookie = 'name=userInfo'</code></li>
+      <li>Change a cookie by assigning the same name (key) with a new value</li>
+      <li>The document.cookie property will return the cookie.</li>
+      <li>To get all of the key/value pairs from a cookie, split the cookie with a <code>"; "</code></li>
+      <li>To get the value for each key split the key/value pairs with a <code>"="</code></li>
+      <li>To make a cookie persistent add a key/value pair with the key="expires" and the value to some future datetime.  If you don't add this then the cookie will be removed when the browser session ends, such as when the browser closes</li>
+      <li>To make cookies available to all other domains add a key/value pair of <code>path=/</code>. To make it available to another specific domain add the key/value pair <code>domain=myotherdomain.com</code></li>
+      <li>Ensure cookies are transmitted securely over https by adding the keyword <code>secure</code> to the cookie.</li>    
+      <li>To delete a cookie set the expires key to a historical time.</li>
+    </ul>
+    <li>The setTimeout() method will call another method at some future time. The return value is an id for the timer and can be used to cancel the timer with the clearTimeout() method.</li>
+    <li>The setInterval() method is like setTimeout, but will repeat until a corresponding clearInterval() method is called.</li>
+    <li>Both setTimeout and setInterval can be used for animations, but may result in poor performance.</li>
+    <li>The requestAnimationFrame() method should be preferred for animations.  It will use any browser graphic acceleration and won't run with the tab is in the background. Use the cancelAnimationFrame() method to end the loop.</li>
+    <li>When practical use css animation tools instead. This is usually the most performant option.</li>    
+  </ul>
+
+  <h2>HTML 5</h2>
+  <ul>
+    <li>The <code>data-</code> attribute allows you to include data with an HTML element. For example, and objects id could be <code>data-id="234"</code> These attributes are ignored by the browser.</li>
+    <li>Access the "data-" attributes using the dataset property of the element  <code>let id = myDiv.dataset.id</code> Note, additional hythons are removed an camel casing is used <code>data-first-name</code> becomes <code>dataset.firstName</code></code></li>
+    
+    <h3>Web Storage</h3>
+    <li>The Web Storage API holds site related key/value pairs.  It is similar to cookies storage, but easier to use with a greater capacity and not transferred over http calls.</li>
+    <li>Web Storage is accessed through the localStorage object with several methods.</li>
+    <ul>
+      <li>The setItem(key, value) method is use to store data</li>
+      <li>The getItem(key) method is use to retrieve a value for a given key.</li>
+      <li>You can also use a property of teh localStore object as an implied key. For example, <code>localStorage.name = "Tom" or let name = localStorage.name</code></li>
+      <li>The removeItem(key) will remove the key/value pair from localStorage. As will the following using the property name <code>delete localStorage.name</code></li>
+      <li>The entire localStorage for the site can be cleared with the method <code>localStorage.clear()</code></li>
+    </ul>
+    <li>The storage event is fired anytime a localStorage value is changed.  This is the only event that can be seen by other windows. It provides the following values key, oldValue, newValue, and storageArea (local or session storage)</li>
+    <li>You can use JSON notation to store large object under a single key.</li>
+    <li>The geolocation object will allow you to access the browser current GPS information.</li>
+    <li>The getCurrentPosition() method will give you the current position in latitude and longitude, ground speed, altitude, heading and a timestamp.</li>
+    <li>the watchPosition() takes a callback method that will be called every time the device is updated. Use the clearWatch(id) method to stop the callbacks.</li>
+    <h3>Web Workers</h3>
+    <li>Web Workers are used to do long duration processing on a background thread.</li>
+    <li>Workers are created with a Worker object that takes a js file to run: <code>const worker = new Worker('task.js');</code> which should typically be downloaded with the rest if the website.</li>
+    <li>Workers communicate with the frontend by passing messages.</li>
+    <ul>
+      <li><code>worker.postMessage("Hello");</code> posts a message to the worker.</li>
+      <li><code>self.postMessage("Finished");</code> posts a message to the main thread (or web page).</li>
+      <li>A posted message fires off the "message" event.  An event handler needs to be registered to deal with the method.</li>
+      <li>A worker can be terminated from the main script <code>worker.terminate();</code></li>      
+    </ul>
+    <li>Web works can be shared by multiple scripts.</li>
+    <li>The service worker API allows scripts to intercept network requests. Letting them have access to push notifications and background syncing.</li>
+    <li>Web Sockets allow for two way communication with a server.  This means the server can push data out to the browser based on external stimulus, not just a browser request.</li>
+    <li>The Notification API can also push messages to the browser, but require the user to grant permission.</li>
+    <li>The "audio" and "video" elements have a set of APIs that allow the playback and manipulation of media files.</li>
+  </ul>
+
+ 
+
+  <h2>Questions</h2>
+  <ul>
+    <li>I don't have any questions this week, but I think it would be cool if one of the future activities dealt with "Workers".</li>
+  </ul>
+</body>
+</html>

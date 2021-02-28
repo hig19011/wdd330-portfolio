@@ -31,10 +31,10 @@ const links = [
     label:"Week 8",
     url: "week08/index.html"
   },
-  // {
-  //   label:"Week 9",
-  //   url: "week09/index.html"
-  // },
+  {
+    label:"Week 9",
+    url: "week09/index.html"
+  },
   // {
   //   label:"Week 10",
   //   url: "week10/index.html"
