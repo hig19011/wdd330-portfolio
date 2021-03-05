@@ -1,5 +1,4 @@
 
-let currentAudio = null;
 let keyLength = [];
 
 bindKeys = () => {
@@ -22,16 +21,15 @@ playSound = (id) => {
   let audios = document.getElementsByTagName('audio');
   for(let i=0;i<audios.length; i++) {
     if(audios[i].dataset.key == id) {
-      if(currentAudio != null && currentAudio.paused == false) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        stopPlayingKey(currentAudio.dataset.key);
+      if(audios[i].paused == false) {
+        audios[i].pause();
+        audios[i].currentTime = 0;
+        stopPlayingKey(audios[i].dataset.key);
       }
 
       audios[i].play();     
       playingKey(id);
 
-      currentAudio = audios[i];
       return;
     }
   }
@@ -43,8 +41,7 @@ playingKey = (id) => {
     if(keys[i].dataset.key == id) {
       moveKey(keys[i],id);
 
-      keys[i].classList.add("playing");      
-      keys[i].style.transform = "translateY("+keyLength[id]+"px)";
+      keys[i].classList.add("playing");           
       return;
     }
   }
@@ -53,9 +50,9 @@ playingKey = (id) => {
 moveKey = (key,id) => {
   keyLength[id] += 10;
   if(keyLength[id] > 100){
-    keyLength[id] = 0;
-    key.style.transform = "translateY("+keyLength[id]+"px)";
+    keyLength[id] = 0;   
   }
+  key.style.transform = "translateY("+keyLength[id]+"px)";
 }
 
 stopPlayingKey = (id) => {
