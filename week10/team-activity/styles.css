@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;700&display=swap');
+
+html {  
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  padding: 4px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 2px;
+}
+
+li span:nth-child(1) {
+  display: inline-block;
+  font-weight: bold;
+  min-width: 5rem;
+}
+
+.hide-me {
+  display: none;
+}

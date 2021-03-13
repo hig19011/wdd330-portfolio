@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Form Validation and Fetch - Notes</title> 
+  <link rel="stylesheet" href="../css/styles.css" />  
+  <script src="js/links.js"></script>
+</head>
+<body>
+  <h1>Notes</h1>
+
+  <h2>Client-side form Validation</h2>
+  <ul>
+    <li>Making sure all required form fields are filled out and in the correct format is important.</li>  
+    <li>It improves the user experience but prevent the delay from submitting a form to the server and have to wait for it to come back as rejected.</li>
+    <li>It is also vital to do the same checks on the server side in order to protect the system from malicious users.</li>
+    <li>Good form validation provides feedback specific to the issues with each field.</li>
+    <li>Why validate?</li>
+    <ul>
+      <li>To get the right data in the right format.</li>
+      <li>To protect user data.</li>
+      <li>To protect the application.</li>
+    </ul>
+    <h3>Built-in form validation</h3>
+    <li>Built-in form validation is preformed by the browser and is typically more performant than validation done in JavaScript.</li>
+    <li>Built-in features</li>
+    <ul>
+      <li><code>required</code> specifies the field must be filled in before submission.</li>
+      <li><code>minlength</code> and <code>maxlength</code> Specify the range of the character count in strings.</li>
+      <li><code>min</code> and <code>max</code> Specify the range of a number value.</li>
+      <li><code>type</code> indicates the expected form of the data like a email or phone number</li>
+      <li><code>step</code> indicates how many units a value will change when the field controls are used.</li>
+      <li><code>patter</code> takes a regular expression to validate the field against.</li>
+      <li><code>:valid :invalid</code> CSS pseudo-classes allow styling of a field when it passes or fails validation</li>
+    </ul>
+    <h3>JavaScript form validation</h3>
+    <li>Forms are also often validated using JavaScript to prove finer control and feedback.</li>
+    <li>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation">Constraint Validation API</a> contains a set of methods and properties that allow the user to more easily do validation on common form elements.</li>
+    <li>The API makes the following properties available on the elements it supports</li>
+    <ul>
+      <li><code>validationMessage</code> give you the browser message. The <code>setCustomValidity() can be used</code> to allow you to override the standard validation message for the element.</li>
+      <li><code>validity</code> is a set of properties to help validate different types of data and their range of acceptable entries.</li>
+      <li><code>willValidate</code> tells you if the element will be validated.</li>
+    </ul>
+  </ul>
+
+  <h2>Fetch</h2>
+  <ul>
+    <li>Fetch is way to send asynchronous HTTP requests.</li>
+    <li>It returns request responses via promises helping to stay away from callback issues.</li>
+    <li>It is an easy API to use in service workers.</li>
+    <li>Fetch that completes the requests and gets a response will always return its Promise, regardless of the HTTP status code</li>
+    <li>Fetch won't send cross-origin cookies without the credentials set in init options</li>
+    <li>The following is a basic fetch call.  You call the URL. Then parse the json out of the response.  Then do something with the data.
+      <pre><code>fetch('http://example.com/movies.json')
+      .then(response => response.json())
+      .then(data => console.log(data));</code>
+      </pre>
+    </li>
+    <li>There are a number of request options that can be specified in the init object.</li>
+    <ul>
+      <li>method - specify GET, POST, DELETE and more</li>
+      <li>mode - no-cors, cors, and same-origin to let the fetch API know if it can talk to other servers or not.</li>
+      <li>cache - many options default, no-cache, reload, force-cache, only-if-cached, for caching a request, refresh a cached request and more.</li>
+      <li>credentials - same-origin, include, omit. This option lets you decide when and if you want to send credentials to the server.</li>
+      <li>headers - many different pieces of information can go here.  An example is the Content-Type such as 'application/json'</li>
+      <li>redirect - manual, follow, error - how to handle a response that comes back with a redirect URL.</li>
+      <li>referrerPolicy - no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url</li>
+      <li>body - data passed along for requests like POST and PUT.  Body data type should match the Content-Type in the headers</li>
+    </ul>
+  </ul>
+ 
+
+  <h2>Questions</h2>
+  <ul>
+    <li>I don't have any questions this week, but I think it would be cool if one of the future activities dealt with "Workers".</li>
+  </ul>
+</body>
+</html>
