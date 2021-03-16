@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 $background: white;
@@ -26,6 +27,9 @@ html, body {
   
 } 
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Baskerville', serif;
+}
 
 header {
   display:flex;
@@ -45,6 +49,7 @@ nav {
   color: $card-background;
   font-weight: bolder;
   box-shadow: 0 5px 5px 0px gray;
+  font-family: 'Libre Baskerville', serif;
   ul{    
     list-style-type: none;
     display: flex;
@@ -57,6 +62,7 @@ nav {
       flex-grow: 1;
       text-align: center;
       padding: 8px;
+      cursor: pointer;
     }
     
     li:hover {
@@ -76,10 +82,15 @@ nav {
   }
   .searchWords {
     display:flex;     
-    margin-bottom: 8px;   
+    margin-bottom: 8px; 
+    font-size: 16px;  
     input:nth-child(1) {
       flex-grow: 2;
       margin-right: 12px;
+      font-size: 16px;
+    }
+    input:nth-child(2) {
+      font-size: 16px;
     }
   }
   .searchOptions {
@@ -101,6 +112,7 @@ nav {
 .pagination {
   @include card();
   padding: 4px;
+  font-size: 18px;
   ul{
     list-style-type: none;
     display: flex;
@@ -109,6 +121,13 @@ nav {
     margin: 0;
     li{
       padding: 8px;
+      cursor: pointer;      
+    }
+    li:hover {
+      color: $background;
+    }
+    li:active {
+      color: $accent;
     }
   }
 }

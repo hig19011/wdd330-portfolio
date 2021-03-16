@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 html, body {
   margin: 0;
@@ -5,6 +6,10 @@ html, body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Baskerville', serif;
 }
 
 header {
@@ -29,6 +34,7 @@ nav {
   font-weight: bolder;
   -webkit-box-shadow: 0 5px 5px 0px gray;
           box-shadow: 0 5px 5px 0px gray;
+  font-family: 'Libre Baskerville', serif;
 }
 
 nav ul {
@@ -51,6 +57,7 @@ nav ul li {
           flex-grow: 1;
   text-align: center;
   padding: 8px;
+  cursor: pointer;
 }
 
 nav ul li:hover {
@@ -80,6 +87,7 @@ nav ul li:active {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 8px;
+  font-size: 16px;
 }
 
 .search .searchWords input:nth-child(1) {
@@ -87,6 +95,11 @@ nav ul li:active {
       -ms-flex-positive: 2;
           flex-grow: 2;
   margin-right: 12px;
+  font-size: 16px;
+}
+
+.search .searchWords input:nth-child(2) {
+  font-size: 16px;
 }
 
 .search .searchOptions {
@@ -120,6 +133,7 @@ nav ul li:active {
   -webkit-box-shadow: 0 5px 5px 0px gray;
           box-shadow: 0 5px 5px 0px gray;
   padding: 4px;
+  font-size: 18px;
 }
 
 .pagination ul {
@@ -136,6 +150,15 @@ nav ul li:active {
 
 .pagination ul li {
   padding: 8px;
+  cursor: pointer;
+}
+
+.pagination ul li:hover {
+  color: white;
+}
+
+.pagination ul li:active {
+  color: #6C7B58;
 }
 
 .book-card {
