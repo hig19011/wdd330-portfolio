@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDD 330 - Team Activity - Week 11</title> 
+  <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
+  <style>
+    .hidden{
+      display: none;
+    }
+    .errors {
+      color: red;
+    }
+    input, label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    form {
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Week 11 - Team Activity</h1>
+ 
+  <div id="errors" class="errors hidden"></div>
+
+  <form id="login">
+    <label for="username">User Name</label>
+    <input id="username" value="user1@email.com">
+    <label for="password">Email</label>
+    <input id="password" value="user1">
+    <input type="button" id="loginButton" value="Login">
+  </form>
+
+  <form id="newPost" class="hidden" >
+    <label for="newPostTitle">Title</label>
+    <input id="newPostTitle" value="">
+    <label for="newPostContent">Content</label>
+    <textarea id="newPostContent"></textarea>
+    <input type="button" id="newPostButton" value="New Post">
+  </form>
+ 
+  <ul id="postList"></ul>
+ 
+  <script src="main.js" type="module"></script>
+</body>
+</html>
