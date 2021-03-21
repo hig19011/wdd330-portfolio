@@ -132,6 +132,36 @@ nav {
   }
 }
 
+.search-card {
+  @include card();
+
+  display:grid;
+  grid-template-columns: .5fr 1fr;
+
+  h3{
+    grid-column: 1/3;
+    margin-top: 0px;
+  }
+  img{
+    width: 90%;
+    max-width: 250px;
+  }
+  .book-details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    margin-top: 12px;
+    .detail-name {
+      font-weight: bold;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .detail-value {
+      
+    }
+  }
+}
+
 .book-card {
   @include card();
 

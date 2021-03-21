@@ -2,30 +2,33 @@
 export default class Book {
 
   constructor() {
-    this.baseUrl = "http://openlibrary.org/search.json?"
+    this.baseSearchUrl = "http://openlibrary.org/search.json?"
+    this.baseBookUrl = "https://openlibrary.org/works/"
 
-    this.Title = "";
-    this.ISBN = "";
-    this.Published = "";
-    this.Subject = "";
-    this.Description = "";
-    this.CoverSmall = "";
-    this.CoverLarge = "";
-    this.Series = "";
-    this.Pages = "";
-    this.Languages = "";
-    this.Publishers = "";
+    this.Title = "Unknown";
+    this.ISBN = "Unknown";
+    this.Published = "Unknown";
+    this.Subject = "Unknown";
+    this.Description = "Unknown";
+    this.CoverSmall = "Unknown";
+    this.CoverLarge = "Unknown";
+    this.Series = "Unknown";
+    this.Pages = "Unknown";
+    this.Languages = "Unknown";
+    this.Publishers = "Unknown";
+
+    this.Cover = "";
 
     this.searchedBooks = [];
   }
 
-  searchForBooks = (keyWords, subject, title, author) => {
+  searchForBooks = async (keyWords, subject, title, author) => {
     if (keyWords == "" || (!subject && !title && !author)) {
       this.searchedBooks = [];
       return;
     }
 
-    let url = this.baseUrl;
+    let url = this.baseSearchUrl;
     let searchParams = "";
     let encodedKeyWorks = encodeURIComponent(keyWords);
     if (subject) {
@@ -44,31 +47,86 @@ export default class Book {
       searchParams += "author=" + encodedKeyWorks;
     }
     
+    // if (searchParams.length > 0) {
+    //   searchParams += "&";
+    // }
+    // searchParams += "details=true"
+    
     if (searchParams.length > 0) {
       searchParams += "&";
-    }
-    searchParams += "details=true"
-    
+     }
+     searchParams += "page=1"
 
 
     url = url + searchParams;
-    this.searchedBooks = fetch(url)
+    this.searchedBooks = await fetch(url)
       .then(response => response.json())
       .then(data => Array.from(data.docs).map(x => this.fillBook(x)))
       .catch(e => console.log(e));
+
+    //console.log(this.searchedBooks);
+
+    return this.searchedBooks;
   }
 
   //  need to use "Works API" to get description and other fields, may need to make additional API calls for author and other data.
   fillBook = (data) => {
-    console.log(data);
+    //console.log(data);
     var book = new Book();
-    book.Title = data.title;
+    if(data.title){
+      book.Title = data.title;
+    }
+    if(data.cover_i){
+      book.Cover = data.cover_i;
+    }
+
+
     if(data.isbn) {
       book.ISBN = data.isbn[0];
     }
-    book.Published = data.publish_date[0];
-    book.Subject = data.subject.reduce( (accum, curVal, curIdx, array ) =>{return accum+curVal+', '}, "");
-    book.Description = data.text
+
+    if(data.author_name){      
+      book.Author = data.author_name[0];
+    }
+
+    if(data.first_publish_year){
+      book.Published = data.first_publish_year; 
+    }
+    else if(data.publish_date){
+      book.Published = data.publish_date[0];
+    }
+   
+    if(data.subject){
+      book.Subject = data.subject.reduce( (accum, curVal, curIdx, array ) =>{return accum+curVal+', '}, "");
+    }   
+    if(data.key){
+      book.Key = data.key;
+    }
+    
     return book;
   }
+
+  getBookDetails = async (id) => {
+    let url = this.baseBookUrl + id + ".json";
+    console.log(url);
+    //url = "https://openlibrary.org/works/OL19749687W.json"
+    console.log(url);
+    this.bookDetails = await fetch(url)
+      .then(response => response.json())
+      .then(data => this.fillBook(data))
+      .catch(e => console.log(e));
+
+    return this.bookDetails;
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
