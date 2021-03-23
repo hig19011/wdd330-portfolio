@@ -22,7 +22,7 @@ export default class Book {
     this.searchedBooks = [];
   }
 
-  searchForBooks = async (keyWords, subject, title, author) => {
+  searchForBooks = async (keyWords, subject, title, author, page=1) => {
     if (keyWords == "" || (!subject && !title && !author)) {
       this.searchedBooks = [];
       return;
@@ -55,18 +55,21 @@ export default class Book {
     if (searchParams.length > 0) {
       searchParams += "&";
      }
-     searchParams += "page=1"
-
+     searchParams += "page="+page;
 
     url = url + searchParams;
+    this.totalBooksFound = 0;
     this.searchedBooks = await fetch(url)
       .then(response => response.json())
-      .then(data => Array.from(data.docs).map(x => this.fillBook(x)))
+      .then(data =>{
+        this.totalBooksFound = data.num_found;
+        return Array.from(data.docs).map(x => this.fillBook(x));
+      })
       .catch(e => console.log(e));
 
     //console.log(this.searchedBooks);
 
-    return this.searchedBooks;
+    return { totalBooksFound: this.totalBooksFound, searchedBooks: this.searchedBooks };
   }
 
   //  need to use "Works API" to get description and other fields, may need to make additional API calls for author and other data.

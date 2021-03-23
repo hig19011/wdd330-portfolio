@@ -24,8 +24,13 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  
+  height: 100%; 
 } 
+
+body {
+  display: flex;
+  flex-direction: column;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Libre Baskerville', serif;
@@ -72,6 +77,10 @@ nav {
       background-color: $active;
     }
   }
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 .search {
@@ -129,6 +138,9 @@ nav {
     li:active {
       color: $accent;
     }
+  }
+  .currentPage {
+    color: red;
   }
 }
 
@@ -194,9 +206,14 @@ nav {
   }
 }
 
+.hide-me {
+  display:none;
+}
+
 footer {
   background-color: $header-background;
   color: $background;
   padding: 16px;
   text-align: center;
+  flex-shrink: 0;
 }
