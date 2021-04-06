@@ -1,3 +1,4 @@
+import BookStorage from "./BookStorage.js"
 
 export default class Book {
 
@@ -5,32 +6,34 @@ export default class Book {
     this.baseSearchUrl = "http://openlibrary.org/search.json?"
     this.baseBookUrl = "https://openlibrary.org"
 
+    this.Author = "";
+    this.AuthorBirthDay = "";
+    this.AuthorDeathDay = "";
     this.Title = "Unknown";
     this.ISBN = "Unknown";
     this.Published = "Unknown";
     this.Subject = "Unknown";
-    this.Description = "Unknown";
+    this.Description = "Description is unavailable";
  
     this.Series = "Unknown";
     this.Pages = "Unknown";
-    this.Languages = "Unknown";
+    this.Languages = "";
     this.Publishers = "Unknown";
     this.Key = "";
     this.EditionKey = "";
 
     this.Cover = "";
-    //this.Covers = [];
 
-    this.searchedBooks = [];
+    this.Author = "";
+    this.AuthorBirthDay = "";
+ 
   }
 
- 
-
-  //  need to use "Works API" to get description and other fields, may need to make additional API calls for author and other data.
-  fillBook = (data, book) => {
-    //console.log(data);
+  // need to use "Works API" to get description and other fields, 
+  // may need to make additional API calls for author and other data.
+  fillBook = async (data, book) => {
     if(book == undefined){
-      var book = new Book();
+      book = new Book();
     }
 
     if(data.title){
@@ -49,6 +52,12 @@ export default class Book {
 
     if(data.author_name){      
       book.Author = data.author_name[0];
+    }
+    if(data.authors){
+      let authorData = await this.getAuthorDetails(data.authors[0].author.key);
+      book.Author = authorData.name;
+      book.AuthorBirthDay = authorData.birth_date;
+      book.AuthorDeathDay = authorData.death_date;
     }
 
     if(data.first_publish_year){
@@ -77,6 +86,14 @@ export default class Book {
       } else if(data.description.value){
         book.Description = data.description.value;
       }
+    }
+
+    if(data.language){
+      book.Languages = data.language[0];
+    }
+
+    if(data.publisher){
+      book.Publisher = data.publisher[0];
     }
     
     return book;
@@ -119,42 +136,86 @@ export default class Book {
 
     url = url + searchParams;
     this.totalBooksFound = 0;
-    this.searchedBooks = await fetch(url)
+    let searchedBooks = await fetch(url)
       .then(response => response.json())
       .then(data =>{
         this.totalBooksFound = data.num_found;
-        return Array.from(data.docs).map(x => this.fillBook(x));
+        //return Array.from(data.docs).map(async (x) => await this.fillBook(x));
+        let result = Promise.all(data.docs.map(d => this.fillBook(d)));
+        return result;
       })
+      .then (filledBook => filledBook)
       .catch(e => console.log(e));
 
-    //console.log(this.searchedBooks);
+      searchedBooks = searchedBooks.sort(this.sortByPublishDate);
 
-    return { totalBooksFound: this.totalBooksFound, searchedBooks: this.searchedBooks };
+      return { totalBooksFound: this.totalBooksFound, searchedBooks: searchedBooks };
   }
 
   getBookDetails = async (book) => {
     let id = book.edition_key;
     id = book.Key;
     let url = this.baseBookUrl + id + ".json";
-    console.log(url);
-    //url = "https://openlibrary.org/works/OL19749687W.json"
-    console.log(url);
     this.bookDetails = await fetch(url)
       .then(response => response.json())
-      .then(data => this.fillBook(data, book))
+      .then(async data => await this.fillBook(data, book))
       .catch(e => console.log(e));
 
     return this.bookDetails;
   }
 
+  getAuthorDetails = async (authorKey) => {
+    let url = this.baseBookUrl + authorKey + ".json";
+    this.authorData = await fetch(url)
+      .then(response => response.json())
+      .then(data => data)
+      .catch(e => console.log(e));
 
+    return this.authorData;
+  }
 
+  addToFavorites = () => {
+    let storage = new BookStorage();
+    storage.saveBook(this);
+  }
 
+  removeFromFavorites = () => {
+    let storage = new BookStorage();
+    storage.deleteBook(this);
+  }
 
+  getMyBooks = () => {
+    let storage = new BookStorage();
+    let myBooks = storage.getBooks();
+    if(myBooks === undefined) {
+      myBooks = [];
+    }
 
+    myBooks = myBooks.map((x)=>{
+      let newBook = new Book();
+      newBook.Author = x.Author;      
+      newBook.Cover = x.Cover;
+      newBook.Description = x.Description;
+      newBook.EditionKey = x.EditionKey;
+      newBook.ISBN = x.ISBN;
+      newBook.Key = x.Key;
+      newBook.Languages = x.Languages;
+      newBook.Pages = x.Pages;
+      newBook.Published = x.Published;
+      newBook.Publishers = x.Publishers;
+      newBook.Series = x.Series;
+      newBook.Subject = x.Subject;
+      newBook.Title = x.Title;
+      return newBook;      
+    })
+    myBooks = myBooks.sort(this.sortByPublishDate);    
+    return myBooks;
+  }
 
-
-
-
+  sortByPublishDate = (a,b) => {
+    let x = a.Published == "Unknown" ? "9999" : a.Published;
+    let y = b.Published == "Unknown" ? "9999" : b.Published;
+    return x > y ? 1 : -1 
+  }
 
 }
