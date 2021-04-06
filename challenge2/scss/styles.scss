@@ -10,6 +10,14 @@ $hover: #608EB6;
 $active: #8D9BE2;
 
 
+$star-size: 30px;
+$star-size-min: 0px;
+$star-size-max: 36px;
+$star-offset: 0px;
+$star-offset-min: 13px;
+$star-offset-max: -3px;
+
+
 @mixin card() {
   margin: 8px 0 12px 0;
   padding: 16px;
@@ -34,6 +42,10 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Libre Baskerville', serif;
+}
+
+h2 {
+  text-align: center;
 }
 
 header {
@@ -148,7 +160,7 @@ main {
   @include card();
 
   display:grid;
-  grid-template-columns: .5fr 1fr;
+  grid-template-columns: .5fr 1fr auto;
 
   h3{
     grid-column: 1/3;
@@ -159,6 +171,7 @@ main {
     max-width: 250px;
   }
   .book-details {
+    grid-column:2/4;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto 1fr;
@@ -168,9 +181,6 @@ main {
       margin-right: 8px;
       margin-bottom: 8px;
     }
-    .detail-value {
-      
-    }
   }
 }
 
@@ -178,7 +188,7 @@ main {
   @include card();
 
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
 
   h3{
     grid-column: 1/3;
@@ -190,19 +200,33 @@ main {
   .book-details {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto auto 1fr;
     margin-top: 12px;
-    .detail-name {
-      font-weight: bold;
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
-    .detail-value {
-      
-    }
+    grid-column: 2/4;
   }
+
   p {
     grid-column: 1/3;
+  }
+
+  .detail-name {
+    font-weight: bold;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .description{
+    grid-column: 1/4;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  button {
+    padding: 4px;
+  }
+
+  .favorite {
+    grid-column: 3/4;
   }
 }
 
@@ -216,4 +240,136 @@ footer {
   padding: 16px;
   text-align: center;
   flex-shrink: 0;
+}
+
+
+
+
+$yellow: #F5CB57;
+
+
+.favorite {
+  position: relative;  
+  height: $star-size;
+  width: $star-size;
+  margin: 1em 0;
+  svg {
+    position: absolute;
+    width: $star-size;
+    height: $star-size;    
+    .star-shape {
+      fill: rgba($text,0.0);
+      stroke: rgba($text,0.7);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 5px;
+    }
+  }   
+  
+  &.animate {
+    svg {
+      animation-name: star;
+      animation-duration: 600ms;
+      .star-shape {
+        animation-name: starColor;
+        animation-duration: 600ms;
+        animation-fill-mode: forwards;
+      }
+    }
+    
+  }
+}
+
+
+@keyframes star {
+  0% {
+    left: $star-offset;
+    top: $star-offset;
+    width: $star-size;
+    height: $star-size;
+  } 
+  20% {
+    left: $star-offset-max;
+    top: $star-offset-max;
+    width: $star-size-max;
+    height: $star-size-max;
+  }
+  30% {
+    left: $star-offset-min;
+    top: $star-offset-min;
+    width: $star-size-min;
+    height: $star-size-min;
+  }
+  60% {
+    left: $star-offset-min;
+    top: $star-offset-min;
+    width: $star-size-min;
+    height: $star-size-min;
+  }
+  80% {
+    left: $star-offset-max;
+    top: $star-offset-max;
+    width: $star-size-max;
+    height: $star-size-max;
+  }
+  100% {
+    left: $star-offset;
+    top: $star-offset;
+    width: $star-size;
+    height: $star-size;
+  }
+}
+
+@keyframes starColor {
+  0% {
+    
+  } 
+  20% {
+    fill: rgba($text,0.0);
+    stroke: rgba($text,0.7);
+  }
+  30% {
+    fill: rgba($text,0.0);
+    stroke: rgba($text,0.7);
+  }
+  60% {
+    fill: rgba(#F5CB57,1);
+    stroke: rgba(#d1ac46,1);
+  }
+  80% {
+    fill: rgba(#F5CB57,1);
+    stroke: rgba(#d1ac46,1);
+  }
+  100% {
+    fill: rgba(#F5CB57,1);
+    stroke: rgba(#d1ac46,1);
+  }
+}
+
+
+@media screen and (min-width:960px) {
+  nav {
+    ul {      
+      max-width: 960px;
+      margin: 0 auto;   
+    }
+  }
+  main {
+    width: 960px;
+    min-width: 960px;
+    max-width: 960px;
+    margin: 0 auto;    
+  }
+  .search {
+    border: 1px solid $hover;
+  }
+  .search-card {
+    border: 1px solid $hover;
+  }
+  .book-card {
+    border: 1px solid $hover;
+  }
+  .pagination {
+    border: 1px solid $hover;
+  }
 }
