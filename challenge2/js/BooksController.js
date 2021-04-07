@@ -7,25 +7,37 @@ export default class BooksController {
   constructor() {
     this.books = new Book();
     this.booksView = new BooksView();
+
     this.searchButton = document.getElementById("buttonSearch");
     this.searchButton.addEventListener('click', async () => {
       await this.searchForNewBooks();
-    })
+    });
+
+    this.textSearch = document.getElementById("textSearch");  
+    this.textSearch.addEventListener('keyup', async (ev) => {
+      if(ev.code === "Enter" || ev.code === "NumpadEnter") {
+        await this.searchForNewBooks();
+      }
+    });
+
     this.navFindBooks = document.getElementById("nav-find-books");
     this.navFindBooks.addEventListener("click", async () => {
       await this.searchForNewBooks();      
       this.buildSearchPage();
-    })
+      this.showingMyBooks = false;
+    });
 
     this.navMyBooks = document.getElementById("nav-my-books");
     this.navMyBooks.addEventListener("click", () => {
       this.currentPage = 1;
       this.buildMyBooksPage();
-    })
+      this.showingMyBooks = true;
+    });
 
     this.currentPage = 1;
     this.totalBooks = 0;
     this.searchedBooks = [];
+    this.showingMyBooks = false;
   }
 
   buildSearchPage() {
@@ -90,21 +102,19 @@ export default class BooksController {
     const checkAuthor = document.getElementById("checkAuthor");
     const searchAuthor = checkAuthor.checked;
 
-    const textSearch = document.getElementById("textSearch");
+    const textSearch = document.getElementById("textSearch");    
     let searchWords = textSearch.value;
 
     return { searchWords, searchSubject, searchTitle, searchAuthor };
   }
 
-
-  testGetBookDetails = async (id) => {
-    let details = await this.books.getBookDetails(id);
-    let d1 = details;
-  }
-
   displayBook = async (book) => {
     let details = await this.books.getBookDetails(book);
-    this.booksView.buildBookDisplay(details);
+    if(this.showingMyBooks){
+      this.booksView.buildBookDisplay(details, async () => await this.gotoMyBooksPage(this.currentPage));
+    } else {
+      this.booksView.buildBookDisplay(details, async () => await this.gotoPage(this.currentPage));
+    }
   }
 
 

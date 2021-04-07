@@ -314,15 +314,15 @@ footer {
 
 .favorite {
   position: relative;
-  height: 30px;
-  width: 30px;
-  margin: 1em 0;
+  height: 32px;
+  width: 32px;
+  margin: .3em .6em;
 }
 
 .favorite svg {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 
 .favorite svg .star-shape {
@@ -331,6 +331,17 @@ footer {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 5px;
+}
+
+.favorite .tooltip {
+  visibility: hidden;
+  position: absolute;
+  top: 32px;
+  left: -14px;
+}
+
+.favorite:hover .tooltip {
+  visibility: visible;
 }
 
 .favorite.animate svg {
@@ -353,38 +364,38 @@ footer {
   0% {
     left: 0px;
     top: 0px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
   20% {
-    left: -3px;
-    top: -3px;
-    width: 36px;
-    height: 36px;
+    left: -4px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
   }
   30% {
-    left: 13px;
-    top: 13px;
+    left: 14px;
+    top: 14px;
     width: 0px;
     height: 0px;
   }
   60% {
-    left: 13px;
-    top: 13px;
+    left: 14px;
+    top: 14px;
     width: 0px;
     height: 0px;
   }
   80% {
-    left: -3px;
-    top: -3px;
-    width: 36px;
-    height: 36px;
+    left: -4px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
   }
   100% {
     left: 0px;
     top: 0px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -392,38 +403,38 @@ footer {
   0% {
     left: 0px;
     top: 0px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
   20% {
-    left: -3px;
-    top: -3px;
-    width: 36px;
-    height: 36px;
+    left: -4px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
   }
   30% {
-    left: 13px;
-    top: 13px;
+    left: 14px;
+    top: 14px;
     width: 0px;
     height: 0px;
   }
   60% {
-    left: 13px;
-    top: 13px;
+    left: 14px;
+    top: 14px;
     width: 0px;
     height: 0px;
   }
   80% {
-    left: -3px;
-    top: -3px;
-    width: 36px;
-    height: 36px;
+    left: -4px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
   }
   100% {
     left: 0px;
     top: 0px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 }
 

@@ -4,7 +4,7 @@ export default class Book {
 
   constructor() {
     this.baseSearchUrl = "http://openlibrary.org/search.json?"
-    this.baseBookUrl = "https://openlibrary.org"
+    this.baseBookUrl = "http://openlibrary.org"
 
     this.Author = "";
     this.AuthorBirthDay = "";
@@ -123,12 +123,7 @@ export default class Book {
       }
       searchParams += "author=" + encodedKeyWorks;
     }
-    
-    // if (searchParams.length > 0) {
-    //   searchParams += "&";
-    // }
-    // searchParams += "details=true"
-    
+
     if (searchParams.length > 0) {
       searchParams += "&";
     }
@@ -139,8 +134,7 @@ export default class Book {
     let searchedBooks = await fetch(url)
       .then(response => response.json())
       .then(data =>{
-        this.totalBooksFound = data.num_found;
-        //return Array.from(data.docs).map(async (x) => await this.fillBook(x));
+        this.totalBooksFound = data.num_found;        
         let result = Promise.all(data.docs.map(d => this.fillBook(d)));
         return result;
       })
@@ -156,12 +150,13 @@ export default class Book {
     let id = book.edition_key;
     id = book.Key;
     let url = this.baseBookUrl + id + ".json";
-    this.bookDetails = await fetch(url)
+    let bookDetails = await fetch(url)
       .then(response => response.json())
       .then(async data => await this.fillBook(data, book))
       .catch(e => console.log(e));
-
-    return this.bookDetails;
+    if(bookDetails == undefined)
+      return book;
+    return bookDetails;
   }
 
   getAuthorDetails = async (authorKey) => {

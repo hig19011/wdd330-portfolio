@@ -90,7 +90,6 @@ export default class BooksView {
     if (isFavorite) {
       favoriteSpan.classList.add('animate');
     }
-
     favoriteSpan.addEventListener('click', function (ev) {
       if (favoriteSpan.classList.contains('animate')) {
         favoriteSpan.classList.remove('animate');
@@ -101,6 +100,11 @@ export default class BooksView {
       }
       ev.stopPropagation();
     });
+
+    var toolTipSpan = document.createElement('span');
+    toolTipSpan.innerText = "Favorite!";
+    toolTipSpan.classList.add("tooltip")
+    favoriteSpan.appendChild(toolTipSpan);
 
     return favoriteSpan;
   }
@@ -183,8 +187,7 @@ export default class BooksView {
     return item;
   }
 
-
-  buildBookDisplay = (book) => {
+  buildBookDisplay = (book, onBackCallback) => {
     bookDisplay.innerHTML = "";
     this.displayBookDetails();
 
@@ -193,7 +196,9 @@ export default class BooksView {
 
     let backButton = document.createElement("button");
     backButton.innerText = "Back to Listing";
-    backButton.addEventListener('click', () => this.displayBookListing());
+    backButton.addEventListener('click', () =>{
+      onBackCallback()
+    });
     sectionCard.appendChild(backButton);
 
     let bookTitle = document.createElement('h3');
@@ -241,8 +246,6 @@ export default class BooksView {
     description.classList.add('description')
     sectionCard.appendChild(description);
 
-
-
     bookDisplay.appendChild(sectionCard);
   }
 
@@ -271,6 +274,7 @@ export default class BooksView {
     header.innerText = "My Books";
 
     this.displayBookListing();
+    
     let bookListing = document.getElementsByClassName("book-listing")[0];
     bookListing.innerHTML = '';
     for (let i = 0; i < books.length; i++) {
