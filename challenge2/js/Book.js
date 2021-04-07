@@ -3,8 +3,8 @@ import BookStorage from "./BookStorage.js"
 export default class Book {
 
   constructor() {
-    this.baseSearchUrl = "http://openlibrary.org/search.json?"
-    this.baseBookUrl = "http://openlibrary.org"
+    this.baseSearchUrl = "https://openlibrary.org/search.json?"
+    this.baseBookUrl = "https://openlibrary.org"
 
     this.Author = "";
     this.AuthorBirthDay = "";

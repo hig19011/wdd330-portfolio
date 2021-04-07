@@ -112,7 +112,7 @@ export default class BooksView {
   createCoverImage(book) {
     let coverImage = document.createElement('img');
     if (book.Cover !== "") {
-      coverImage.src = "http://covers.openlibrary.org/b/id/" + book.Cover + "-M.jpg";
+      coverImage.src = "https://covers.openlibrary.org/b/id/" + book.Cover + "-M.jpg";
       coverImage.onload = (e) => {
         if (coverImage.naturalWidth == 1) {
           e.target = 'images/book-placeholder.png'
@@ -120,7 +120,7 @@ export default class BooksView {
       }
     }
     else if (book.ISBN !== "") {
-      coverImage.src = "http://covers.openlibrary.org/b/isbn/" + book.ISBN + "-M.jpg";
+      coverImage.src = "https://covers.openlibrary.org/b/isbn/" + book.ISBN + "-M.jpg";
       coverImage.onload = (e) => {
         if (coverImage.naturalWidth == 1) {
           e.target.src = 'images/book-placeholder.png'
@@ -274,7 +274,7 @@ export default class BooksView {
     header.innerText = "My Books";
 
     this.displayBookListing();
-    
+
     let bookListing = document.getElementsByClassName("book-listing")[0];
     bookListing.innerHTML = '';
     for (let i = 0; i < books.length; i++) {
