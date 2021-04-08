@@ -110,10 +110,11 @@ export default class BooksController {
 
   displayBook = async (book) => {
     let details = await this.books.getBookDetails(book);
+    let myBooks = this.books.getMyBooks();
     if(this.showingMyBooks){
-      this.booksView.buildBookDisplay(details, async () => await this.gotoMyBooksPage(this.currentPage));
+      this.booksView.buildBookDisplay(details, myBooks, async () => await this.gotoMyBooksPage(this.currentPage));
     } else {
-      this.booksView.buildBookDisplay(details, async () => await this.gotoPage(this.currentPage));
+      this.booksView.buildBookDisplay(details, myBooks, async () => await this.gotoPage(this.currentPage));
     }
   }
 

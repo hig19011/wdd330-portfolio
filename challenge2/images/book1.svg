@@ -1,0 +1,48 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 9.385 100 81.232" enable-background="new 0 9.385 100 81.232" xml:space="preserve">
+  <title>Book</title>
+  <desc>Book designed by Tim Boelaars from The Noun Project.</desc>
+	<g>
+		<path id="paper-edge" d="M97.296,9.385H56.757c-2.648,0-5.037,1.099-6.757,2.858c-1.719-1.759-4.108-2.858-6.757-2.858H2.704
+			C1.212,9.385,0,10.596,0,12.088v60.809c0,1.492,1.212,2.705,2.704,2.705h40.54c2.234,0,4.053,1.817,4.053,4.052
+			c0,1.491,1.211,2.704,2.704,2.704s2.704-1.213,2.704-2.704c0-2.234,1.819-4.052,4.053-4.052h40.539
+			c1.492,0,2.704-1.213,2.704-2.705V12.088C100,10.595,98.788,9.385,97.296,9.385z M47.296,71.108
+			c-1.228-0.587-2.604-0.916-4.053-0.916H5.408V14.791h37.835c2.234,0,4.053,1.819,4.053,4.053V71.108z M94.593,70.194H56.757
+			c-1.449,0-2.825,0.327-4.053,0.915V18.844c0-2.234,1.819-4.053,4.053-4.053h37.836V70.194z"></path>
+    <symbol>
+      <path id="text-line" d="M36.487,26.005h-20.27c-1.492,0-2.704,1.212-2.704,2.704c0,1.492,1.212,2.704,2.704,2.704h20.27
+			c1.492,0,2.704-1.211,2.704-2.704C39.19,27.217,37.979,26.005,36.487,26.005z"></path>
+    </symbol>
+    <switch>
+    <g systemlanguage="jp">
+      <g id="left-page">
+        <use xlink:href="#text-line" x="12" y="-44" transform="rotate(90)"/>
+        <use xlink:href="#text-line" x="12" y="-54" transform="rotate(90)"/>
+        <use xlink:href="#text-line" x="12" y="-64" transform="rotate(90)"/>
+      </g>
+      <g id="right-page">
+        <use xlink:href="#text-line" x="12" y="-92" transform="rotate(90)"/>
+        <use xlink:href="#text-line" x="12" y="-102" transform="rotate(90)"/>
+        <use xlink:href="#text-line" x="12" y="-112" transform="rotate(90)"/>        
+      </g>
+    </g>
+    <g systemlanguage="en">
+      <g id="left-page">
+        <use xlink:href="#text-line" />
+        <use xlink:href="#text-line" x="" y="15" />
+        <use xlink:href="#text-line" x="" y="30" />
+      </g>
+      <g id="right-page">
+        <use xlink:href="#text-line" x="48" y="" />
+        <use xlink:href="#text-line" x="48" y="15" />
+        <use xlink:href="#text-line" x="48" y="30" />
+    </g>
+    </g>
+    </switch>
+
+    <path id="book-binding" d="M97.296,78.453H56.757c-1.492,0-2.704,1.21-2.704,2.702c0,2.234-1.819,4.054-4.053,4.054
+			c-2.234,0-4.053-1.819-4.053-4.054c0-1.492-1.212-2.702-2.704-2.702H2.704C1.212,78.453,0,79.663,0,81.155
+			s1.212,2.705,2.704,2.705h38.231c1.165,3.901,4.789,6.757,9.065,6.757s7.9-2.855,9.065-6.757h38.23
+			c1.492,0,2.704-1.213,2.704-2.705S98.788,78.453,97.296,78.453z"></path>
+
+  </g>
+</svg>

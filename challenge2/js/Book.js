@@ -6,6 +6,9 @@ export default class Book {
     this.baseSearchUrl = "https://openlibrary.org/search.json?"
     this.baseBookUrl = "https://openlibrary.org"
 
+    this.IsRead = false;
+    this.IsFavorite = false;
+
     this.Author = "";
     this.AuthorBirthDay = "";
     this.AuthorDeathDay = "";
@@ -171,12 +174,34 @@ export default class Book {
 
   addToFavorites = () => {
     let storage = new BookStorage();
+    this.IsFavorite = true;    
     storage.saveBook(this);
   }
 
   removeFromFavorites = () => {
     let storage = new BookStorage();
-    storage.deleteBook(this);
+    this.IsFavorite = false;
+    if(this.IsRead){
+        storage.saveBook(this);
+    } else {
+      storage.deleteBook(this);
+    }
+  }
+
+  
+  bookRead = () => {
+    let storage = new BookStorage();
+    this.IsRead = true;
+    storage.saveBook(this);    
+  }
+  bookNotRead = () => {
+    let storage = new BookStorage();
+    this.IsRead = false;
+    if(this.IsFavorite){
+        storage.saveBook(this);
+    } else {
+      storage.deleteBook(this);
+    }
   }
 
   getMyBooks = () => {
@@ -193,6 +218,8 @@ export default class Book {
       newBook.Description = x.Description;
       newBook.EditionKey = x.EditionKey;
       newBook.ISBN = x.ISBN;
+      newBook.IsFavorite = x.IsFavorite;
+      newBook.IsRead = x.IsRead;
       newBook.Key = x.Key;
       newBook.Languages = x.Languages;
       newBook.Pages = x.Pages;
