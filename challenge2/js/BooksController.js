@@ -1,9 +1,10 @@
 import Book from "./Book.js"
 import BooksView from "./BooksView.js";
 
-
+// primary controller class
 export default class BooksController {
 
+  //set core inputs with events and initialize classes
   constructor() {
     this.books = new Book();
     this.booksView = new BooksView();
@@ -40,6 +41,7 @@ export default class BooksController {
     this.showingMyBooks = false;
   }
 
+  // build the search page listing of books
   buildSearchPage() {
     const myBooks = this.books.getMyBooks();
     if (this.searchedBooks === undefined) {
@@ -50,6 +52,7 @@ export default class BooksController {
     this.booksView.buildPagination(this.totalBooks, 100, this.currentPage, this.gotoPage, "bottomPagination");
   }
 
+  // build the listing for favorite books
   buildMyBooksPage = () => {
     let myBooks = this.books.getMyBooks();
 
@@ -67,6 +70,7 @@ export default class BooksController {
     this.booksView.buildPagination(myBooks.length, 10, this.currentPage, this.gotoMyBooksPage, "bottomPagination");
   }
 
+  // navigate and load the books for a given page based on the search
   gotoPage = async (page) => {
     this.currentPage = page;
 
@@ -78,11 +82,13 @@ export default class BooksController {
     this.buildSearchPage();
   }
 
+  // navigate and load the books for a given page for favorite books
   gotoMyBooksPage = async (page) => {
     this.currentPage = page;
     this.buildMyBooksPage();
   }
 
+  // preform steps needs to search and load the page.
   searchForNewBooks = async () => {
     this.currentPage = 1;
 
@@ -94,6 +100,7 @@ export default class BooksController {
     this.buildSearchPage();
   }
 
+  // get the search parameters from the UI.
   getSearchParameters() {
     const checkSubject = document.getElementById("checkSubject");
     const searchSubject = checkSubject.checked;
@@ -108,6 +115,7 @@ export default class BooksController {
     return { searchWords, searchSubject, searchTitle, searchAuthor };
   }
 
+  // display details for either a search book or a favorite book
   displayBook = async (book) => {
     let details = await this.books.getBookDetails(book);
     let myBooks = this.books.getMyBooks();

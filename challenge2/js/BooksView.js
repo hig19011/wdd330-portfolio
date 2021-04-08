@@ -1,3 +1,4 @@
+// build all views that are not static members of the web page
 export default class BooksView {
 
   constructor() {
@@ -18,6 +19,7 @@ export default class BooksView {
       </svg>`;
   }
 
+  // build the listing for the search results
   buildBookListing = (books, displayBookCallback, myBooks) => {
     let searchCards = document.getElementsByClassName("search");
         if(searchCards[0] != null){
@@ -36,6 +38,7 @@ export default class BooksView {
     }
   }
 
+  // build each card from the search results
   buildSearchCard = (book, displayBookCallback, myBooks) => {
     let sectionCard = document.createElement('section');
     sectionCard.classList.add("search-card");
@@ -71,6 +74,7 @@ export default class BooksView {
     return sectionCard;
   }
 
+  // helper method for adding a label for details
   addDetailName = (name) => {
     let span = document.createElement('span');
     span.classList.add('detail-name');
@@ -78,6 +82,7 @@ export default class BooksView {
     return span;
   }
 
+  // helper method for adding a value for details
   addDetailValue = (value) => {
     let span = document.createElement('span');
     span.classList.add('detail-value');
@@ -85,6 +90,7 @@ export default class BooksView {
     return span;
   }
 
+  // check if a given book (usually from search results) has been recorded as a favorite book.
   isFavorite = (book, myBooks) => {
     let updatedList = [];
     if (book.Key.includes("works")) {
@@ -96,6 +102,7 @@ export default class BooksView {
     return updatedList.length > 0 ? true : false;
   }
 
+  // check if a given book (usually from search results) has been recorded as a read book.
   isRead = (book, myBooks) => {
     let updatedList = [];
     if (book.Key.includes("works")) {
@@ -107,7 +114,7 @@ export default class BooksView {
     return updatedList.length > 0 ? true : false;
   }
 
-
+  // Create html for the clickable Favoriting Star
   createFavoriteSpan = (book, myBooks) => {
     let favoriteSpan = document.createElement('span');
     favoriteSpan.innerHTML = this.favoriteStar;
@@ -135,6 +142,7 @@ export default class BooksView {
     return favoriteSpan;
   }
 
+  // Create html for the clickable Finish reading book button
   createReadSpan(book, myBooks) {
     let readSpan = document.createElement('span');
     readSpan.innerHTML = this.bookReadSvg;
@@ -167,6 +175,8 @@ export default class BooksView {
     return readSpan;    
   }
 
+  // display the cover image for the book, can come from two different sources
+  // use a placeholder if an image wasn't available.
   createCoverImage(book) {
     let coverImage = document.createElement('img');
     if (book.Cover !== "") {
@@ -192,7 +202,7 @@ export default class BooksView {
     return coverImage;
   }
 
-
+  // build component to handle paginating through search results
   buildPagination = (totalBooks, booksPerPage, currentPage, gotoPageCallback, target) => {
 
     const totalPages = Math.ceil(totalBooks / booksPerPage);
@@ -235,9 +245,9 @@ export default class BooksView {
 
     let sectionExisting = document.getElementById(target);
     sectionExisting.parentNode.replaceChild(section, sectionExisting);
-
   }
 
+  // helper method to create links to each page of search results
   createPageLink = (pageNumber, pageText, gotoPageCallback) => {
     const item = document.createElement('li');
     item.innerText = pageText;
@@ -245,6 +255,8 @@ export default class BooksView {
     return item;
   }
 
+  // create the detailed book information card, 
+  // accessed when a book in the list is clicked on
   buildBookDisplay = (book, myBooks, onBackCallback) => {
     bookDisplay.innerHTML = "";
     this.displayBookDetails();
@@ -307,6 +319,7 @@ export default class BooksView {
     bookDisplay.appendChild(sectionCard);
   }
 
+  // show the book listing section, hide book details
   displayBookListing = () => {
     let searchContent = document.getElementById("content");
     searchContent.classList.remove('hide-me');
@@ -314,6 +327,7 @@ export default class BooksView {
     bookDisplay.classList.add('hide-me');    
   }
 
+  // show book details, hide the book listing
   displayBookDetails() {
     let searchContent = document.getElementById("content");
     searchContent.classList.add('hide-me');
@@ -321,6 +335,7 @@ export default class BooksView {
     bookDisplay.classList.remove('hide-me');
   }
 
+  // build list of user favorites, doesn't include read books that aren't favored
   buildMyBooksPage(books, displayBookCallback, myBooks) {
 
     let searchCards = document.getElementsByClassName("search");

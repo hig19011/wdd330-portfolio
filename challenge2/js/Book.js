@@ -1,7 +1,13 @@
+// Holds all details about a book from only line searches
+// Holds the setting for Favorite and Read books
+// Pull book info from the web
+// Hydrates instances of its self from local storage.
 import BookStorage from "./BookStorage.js"
 
 export default class Book {
 
+  // Many book results don't contain information for every field
+  // Set default values for the book in case information is missing
   constructor() {
     this.baseSearchUrl = "https://openlibrary.org/search.json?"
     this.baseBookUrl = "https://openlibrary.org"
@@ -102,6 +108,7 @@ export default class Book {
     return book;
   }
 
+  // build up search string from parameters and fetch lists of books
   searchForBooks = async (keyWords, subject, title, author, page=1) => {
     if (keyWords == "" || (!subject && !title && !author)) {
       this.searchedBooks = [];
@@ -149,6 +156,8 @@ export default class Book {
       return { totalBooksFound: this.totalBooksFound, searchedBooks: searchedBooks };
   }
 
+  // secondary query to get additional details when the
+  // user wants more.
   getBookDetails = async (book) => {
     let id = book.edition_key;
     id = book.Key;
@@ -162,6 +171,7 @@ export default class Book {
     return bookDetails;
   }
 
+  // get extra detail about the author(s)
   getAuthorDetails = async (authorKey) => {
     let url = this.baseBookUrl + authorKey + ".json";
     this.authorData = await fetch(url)
@@ -172,12 +182,14 @@ export default class Book {
     return this.authorData;
   }
 
+  // save the book to local storage because it is a favorite
   addToFavorites = () => {
     let storage = new BookStorage();
     this.IsFavorite = true;    
     storage.saveBook(this);
   }
 
+  // remove as favorite, remove from local storage if not also read
   removeFromFavorites = () => {
     let storage = new BookStorage();
     this.IsFavorite = false;
@@ -188,12 +200,14 @@ export default class Book {
     }
   }
 
-  
+  // save the book to local storage because it is has been read
   bookRead = () => {
     let storage = new BookStorage();
     this.IsRead = true;
     storage.saveBook(this);    
   }
+  
+  // remove as a read book, remove from local storage if not also not a favorite
   bookNotRead = () => {
     let storage = new BookStorage();
     this.IsRead = false;
@@ -204,6 +218,7 @@ export default class Book {
     }
   }
 
+  // retrieve users book list from local storage.
   getMyBooks = () => {
     let storage = new BookStorage();
     let myBooks = storage.getBooks();
@@ -234,6 +249,8 @@ export default class Book {
     return myBooks;
   }
 
+  // helper method to sort book by publish date, 
+  // pushes books without a publish date to the bottom of the list
   sortByPublishDate = (a,b) => {
     let x = a.Published == "Unknown" ? "9999" : a.Published;
     let y = b.Published == "Unknown" ? "9999" : b.Published;
