@@ -147,7 +147,7 @@ export default class BooksView {
     let readSpan = document.createElement('span');
     readSpan.innerHTML = this.bookReadSvg;
     
-    const isRead = this.isRead(book, myBooks);
+    let isRead = this.isRead(book, myBooks);
     if (isRead) {
       readSpan.classList.add('book-read');
     } else {
@@ -155,7 +155,8 @@ export default class BooksView {
     }
 
     readSpan.addEventListener('click', function (ev) {
-      if (isRead) {
+      //isRead = this.isRead(book, myBooks);
+      if (book.IsRead) {
         readSpan.classList.remove('book-read');
         readSpan.classList.add('book-not-read');
         book.bookNotRead();

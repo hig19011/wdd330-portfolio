@@ -94,6 +94,9 @@ export default class BooksController {
 
     const searchParams = this.getSearchParameters();
     let searchResults = await this.books.searchForBooks(searchParams.searchWords, searchParams.searchSubject, searchParams.searchTitle, searchParams.searchAuthor, this.currentPage);
+    if(searchResults == undefined){
+      return;
+    }
     this.totalBooks = searchResults.totalBooksFound;
     this.searchedBooks = searchResults.searchedBooks;
 
