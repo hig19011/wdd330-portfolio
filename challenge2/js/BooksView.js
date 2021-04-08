@@ -344,7 +344,7 @@ export default class BooksView {
     }
 
     let header = document.getElementById('mainHeader');
-    header.innerText = "My Books";
+    header.innerText = "My Favorite Books";
 
     this.displayBookListing();
 
